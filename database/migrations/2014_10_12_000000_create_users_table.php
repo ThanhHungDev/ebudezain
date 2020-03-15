@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
                 $table->increments('id');
                 $table->string('name');
                 $table->string('avatar');
-                $table->string('email')->unique(); /// supper admin cรณ email : xxx@herowebe.com
+                $table->string('email')->unique();
                 $table->string('password');
                 $table->rememberToken();
                 $table->timestamps();
