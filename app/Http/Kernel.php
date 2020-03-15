@@ -59,5 +59,7 @@ class Kernel extends HttpKernel
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+        'CHANGE_LANGUAGE' => \App\Http\Middleware\CHANGE_LANGUAGE::class, //Thêm middleware locale
+        'CHECK_ADMIN_LOGIN' => \App\Http\Middleware\CHECK_ADMIN_LOGIN::class,//Thêm vào dòng này
     ];
 }

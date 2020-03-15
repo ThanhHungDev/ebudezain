@@ -16,11 +16,11 @@
         <div class="login-form-control animated fast fadeIn">
             <form class="login-form" action="{{ Route('ADMIN_POST_LOGIN') }}" method="POST" >
                 {!! csrf_field() !!}
-                @foreach ($errors as $error)
+                @if(session()->has('errors'))
                 <div class="alert alert-warning">
-                    {{ $error }}
+                    {{ session()->get('errors') }}
                 </div>
-                @endforeach
+                @endif
                 <h1 class="title"> Welcome Admin </h1>
                 <div class="input-group">
                     <span class="svg-icon"> @include ("genneral/svg/email") </span>

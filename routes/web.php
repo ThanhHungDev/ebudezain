@@ -17,7 +17,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('/login','LoginController@postLogin')->name('ADMIN_POST_LOGIN');
     Route::get('/logout','LoginController@logout')->name('ADMIN_LOGOUT');
 
-    Route::group(['prefix' => '/', 'middleware' => 'check_admin_login'], function () {
+    Route::group(['prefix' => '/', 'middleware' => 'CHECK_ADMIN_LOGIN'], function () {
 
         Route::get('/dashboard','AdminController@dashboard')->name('ADMIN_DASHBOARD');
     });

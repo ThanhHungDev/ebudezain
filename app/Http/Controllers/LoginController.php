@@ -37,7 +37,7 @@ class LoginController extends Controller
             {
                 $user = Auth::user();
                 ///login thành công
-                if (Gate::allows('is_admin')) {
+                if (Gate::allows('IS_ADMIN')) {
                     $request->session()->flash('success_login_admin', 1);
                     return redirect()->route("ADMIN_DASHBOARD");
                 }else {
@@ -45,7 +45,7 @@ class LoginController extends Controller
                     return redirect()->route("CLIENT_HOME");
                 }
             }else {
-                return redirect()->back()->with('errors_login', 1);
+                return redirect()->back()->with('errors', 'đăng nhập thất bại!!! ');
             }
         }
     }
