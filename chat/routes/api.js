@@ -1,24 +1,19 @@
 /**
  * define
  */
-var express = require('express');
-var router = express.Router();
-var loginController = require("../controllers/LoginController.js")
+var express           = require('express');
+var router            = express.Router();
+var LoginController   = require("../controllers/LoginController.js");
+var validateUserLogin = require('../request/LoginValidatetion.js');
 
 
 
-router.post('/login', async (req, res)=>{
-	await loginController.userLogin(req, res)
-});
-router.post('/register', async (req, res)=>{
-	await loginController.userRegister(req, res)
-});
-router.post('/refesh-token', async (req, res)=>{
-	await loginController.refeshAccessTokenByRefeshToken(req, res)
-});
+router.post('/login', validateUserLogin, LoginController.userLogin);
+router.post('/register', LoginController.userRegister);
+router.post('/refesh-token', LoginController.refeshAccessTokenByRefeshToken);
 
 //https://medium.com/@stockholmux/managing-modularity-and-redis-connections-in-node-js-eb9232f8c1ba
 router.apiSetRedis = function(REDIS){
-	loginController.setREDIS(REDIS);
+	LoginController.setREDIS(REDIS);
 }
 module.exports = router;

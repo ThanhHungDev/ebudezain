@@ -17,12 +17,11 @@ const CONFIG = {
         }
     }, 
     database : {
-        type: 'postgres',
-        username: 'postgres',
-        password: 'admin123',
-        database_name: 'blog',
+        username: 'root',
+        password: '',
+        database_name: 'ebudezain',
         host: local_ip,
-        dialect: 'postgres',
+        dialect: 'mysql',
         logging : false
     },
     REDIS : {

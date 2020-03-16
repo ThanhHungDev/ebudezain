@@ -29,6 +29,16 @@ const ChangeToSlug = ( title ) => {
     slug = slug.replace(/\@\-|\-\@|\@/gi, '');
     return slug;
 };
+const responseErrorValidate = (req, res, next) => {
+    if(!res._error){
+        next();
+    }
+    if(req.isAPI){
+        return res.end(JSON.stringify(error));
+    }
+    req.flash('success', 'đây là message từ root flash');
+    res.redirect('/');
+}
 module.exports = {
-    ChangeToSlug
+    ChangeToSlug, responseErrorValidate
 }

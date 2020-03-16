@@ -7,42 +7,6 @@ var salt      = CONFIG.salt;
 var REDIS;
 
 
-var validateUserLogin = function (email, password, client) {
-    var error = null;
-    if (!email || !password || !client) {
-        error = {
-            user_message: "login fail",
-            internal_message: "block",
-            code: 403
-        };
-    } else if (!validator.isEmail(email)) {
-        error = {
-            user_message: "format email fail",
-            internal_message: "invalid email",
-            code: 400
-        };
-    } else if (!validator.isLength(password, { min: 6, max: 64 })) {
-        error = {
-            user_message: "password character number >= 6 and <= 64 ",
-            internal_message: "invalid password",
-            code: 400
-        };
-    } else if (
-        !client.browser ||
-        !client.browser_version ||
-        !client.browser_major_version ||
-        !client.os ||
-        !client.os_version
-    ) {
-        error = {
-            user_message: "failure for data",
-            internal_message: "invalid object data",
-            code: 400
-        };
-    }
-    return error;
-}
-
 var setTokenAccess = function ( _user, client, refesh) {
     var access = bcrypt.hashSync(refesh, salt);
     var key_redis = renderKeyRedis(_user.id, client);
@@ -63,6 +27,11 @@ const renderKeyRedis = function (id, client) {
     return JSON.stringify(key_obj);
 }
 var userLogin = async (req, res) => {
+    var error = validateUserLogin(req);
+    if (error) {
+        return res.end(JSON.stringify(error));
+    }
+    
     var { email, password, client } = req.body;
     console.log( email, password, client );
     var error, _user; 

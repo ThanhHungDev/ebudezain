@@ -29,6 +29,10 @@ var isAdmin = function( req, res, next ){
         return res.end(JSON.stringify(responses));
     })
 }
+var setFlagApi = function(req, res, next) {
+    req.isAPI = true;
+    next();
+}
 module.exports = {
-    setAllowOrigin, apiJson
+    setAllowOrigin, apiJson, setFlagApi
 };
