@@ -5,7 +5,9 @@
                 <ul class="btn-admin-setting float-right">
                     <li>
                         <a>
-                            <img class="avatar" alt="" src="#" />
+                            @if(Auth::user())
+                            <img class="avatar" alt="" src="{{ asset(Auth::user()->avatar) }}" />
+                            @endif
                             <span class="icon-angle-down">
                                 <svg aria-hidden="true" focusable="false"
                                     data-prefix="fal" data-icon="angle-down" role="img"

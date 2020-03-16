@@ -16,15 +16,13 @@
 <body>
     <div class="wrapper-page">
         <div class="wrapper-header-page">
-            {{-- @include ('layout/admin/partial/header') --}}
+            @include ('layout/admin/partial/header')
         </div>
         <div class="wrapper-main-page">
-            lỗi
             @yield('content_admin')
         </div>
         <div class="wrapper-footer-page">
-            lỗi
-            {{-- @include ('layout/admin/partial/footer') --}}
+            @include ('layout/admin/partial/footer')
         </div>
     </div>
 <script src="{{ asset('jquery.min.js') }}"></script>

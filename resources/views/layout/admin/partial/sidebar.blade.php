@@ -3,14 +3,19 @@
         <img src="/images/logo.png" alt="Hospital">
     </a>
     <ul>
-        <li><a aria-current="page" class="{{ Route::is("ADMIN_DASHBOARD") ? 'active' : null}}" href="{{ route('ADMIN_DASHBOARD') }}">dashboard</a></li>
-        <li><a aria-current="page" class="{{ Route::is("ADMIN_LOGIN") ? 'active' : null}}" href="{{ route('ADMIN_LOGIN') }}">#dashboard</a></li>
-        <li><a class="block-session">Post</a>
+        <li>
+            <a class="{{ Route::is("ADMIN_DASHBOARD") ? 'active' : null}}" 
+            href="{{ route('ADMIN_DASHBOARD') }}">
+                dashboard
+            </a>
+        </li>
+        <li>
+            <a class="block-session">Post</a>
             <ul class="submenu">
                 <li>
-                    <a class="active" 
-                        href="#">
-                        Thêm post
+                    <a class="{{ Route::is("ADMIN_INSERT_POST") ? 'active' : null}}"
+                        href="{{ route('ADMIN_INSERT_POST') }}">
+                        Thêm bài viết
                     </a>
                 </li>
                 <li>
@@ -20,7 +25,8 @@
                 </li>
             </ul>
         </li>
-        <li><a class="block-session">User</a>
+        <li>
+            <a class="block-session">User</a>
             <ul class="submenu">
                 <li><a href="/admin/user">thống kê user</a></li>
             </ul>

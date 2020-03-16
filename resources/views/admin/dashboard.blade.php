@@ -1,4 +1,4 @@
-{@extends('admin._layout')
+@extends('admin._layout')
 
 @section('title', 'Trang Quản Trị')
 

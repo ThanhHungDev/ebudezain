@@ -1,9 +1,11 @@
 <style>
     .wrapper-header-page {
-        background-image: -webkit-gradient(linear, left top, right top, from(#f78ca0), color-stop(19%, #f9748f), color-stop(60%, #fd868c), to(#fe9a8b)) !important;
+        /* background-image: -webkit-gradient(linear, left top, right top, from(#f78ca0), color-stop(19%, #f9748f), color-stop(60%, #fd868c), to(#fe9a8b)) !important;
         background-image: -webkit-linear-gradient(left, #f78ca0 0%, #f9748f 19%, #fd868c 60%, #fe9a8b 100%) !important;
         background-image: -o-linear-gradient(left, #f78ca0 0%, #f9748f 19%, #fd868c 60%, #fe9a8b 100%) !important;
-        background-image: linear-gradient(to right, #f78ca0 0%, #f9748f 19%, #fd868c 60%, #fe9a8b 100%) !important;
+        background-image: linear-gradient(to right, #f78ca0 0%, #f9748f 19%, #fd868c 60%, #fe9a8b 100%) !important; */
+        height: 70px;
+        background-color: #2d425b;
     }
     .btn-admin-setting {
         padding: 15px;

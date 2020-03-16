@@ -20,5 +20,8 @@ Route::group(['prefix' => 'admin'], function () {
     Route::group(['prefix' => '/', 'middleware' => 'CHECK_ADMIN_LOGIN'], function () {
 
         Route::get('/dashboard','AdminController@dashboard')->name('ADMIN_DASHBOARD');
+        Route::get('/post','AdminController@insertPost')->name('ADMIN_INSERT_POST');
+        Route::post('/post','AdminController@savePost')->name('ADMIN_POST_INSERT_POST');
+        
     });
 });
