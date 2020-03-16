@@ -3,7 +3,7 @@
  */
 var express = require('express');
 var router = express.Router();
-var loginController = require("../controllers/loginController.js")
+var loginController = require("../controllers/LoginController.js")
 
 
 

@@ -7,14 +7,16 @@ var app        = express();
  * my define
  */
 var CONFIG           = require('./configs');
-var middlewares      = require("./middlewares");
-var redisController  = require("./controllers/redisController.js");
-var socketController = require("./controllers/socketController.js");
-var api              = require('./routes/api.js');
+var MIDDLEWARE       = require("./middleware");
+
+var RedisController  = require("./controllers/RedisController.js");
+var SocketController = require("./controllers/SocketController.js");
+
+var apiRouter        = require('./routes/api.js');
 /***
  * nodejs allow origin localhost *
  */
-app.use(middlewares.setAllowOrigin);
+app.use(MIDDLEWARE.setAllowOrigin);
 /////////////////////////////////////////////////////////////////////////
 // for parsing application/x-www-form-urlencoded/////////////////////////
 /////////////////////////////////////////////////////////////////////////
@@ -32,19 +34,21 @@ server.listen(CONFIG.SERVER.PORT,  () => {
 });
 /////////////////////////////////////////////////////////////////////////
 //////connect database redis ////////////////////////////////////////////
-const REDIS = redisController.connect();
-redisController.listen_connect(REDIS);
-redisController.listen_error(REDIS);
-api.apiSetRedis(REDIS);
+//////return connect redis to api controller ////////////////////////////
+const REDIS = RedisController.connect();
+RedisController.listen_connect(REDIS);
+RedisController.listen_error(REDIS);
+
+apiRouter.apiSetRedis(REDIS);
 /////////////////////////////////////////////////////////////////////////
 //////run function socket ///////////////////////////////////////////////
-socketController.run(io);
-socketController.setREDIS(REDIS);
+SocketController.run(io);
+SocketController.setREDIS(REDIS);
 /////////////////////////////////////////////////////////////////////////
 //// router express /////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////
-app.use('/api', [ middlewares.apiJson ] , api);
+app.use('/api', [ MIDDLEWARE.apiJson ] , apiRouter);
 app.get('*', (req, res)=>{
     res.setHeader('Content-Type', 'application/json');
     return res.send(JSON.stringify({key:"Page Not Found"}));
