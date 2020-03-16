@@ -8,10 +8,15 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use App\User;
+use App\Http\Requests\VALIDATE_ADMIN_LOGIN;
 
 
 class LoginController extends Controller
 {
+    private $LOGIN_ADMIN_SUCCESS = 'LOGIN_ADMIN_SUCCESS';
+    private $LOGIN_CLIENT_SUCCESS = 'LOGIN_CLIENT_SUCCESS';
+    private $LOGIN_ERROR = 'LOGIN_ERROR';
+
     public function getLogin(){
         if (Auth::check()){
 
@@ -19,34 +24,25 @@ class LoginController extends Controller
         }
         return view('admin.login');
     }
-    public function postLogin(Request $request){
-        $rules = [
-            'email' =>'required|email',
-            'password' => 'required|min:6'
-        ];
-        $validator = Validator::make($request->all(), $rules);
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
-        } else {
-            $dataLogin = array(
-                'email' => strtolower($request->input('email')), 
-                'password' => $request->input('password') 
-            );
-            /// luôn ghi nhớ password trong session
-            if (Auth::attempt( $dataLogin, true ))
-            {
-                $user = Auth::user();
-                ///login thành công
-                if (Gate::allows('IS_ADMIN')) {
-                    $request->session()->flash('success_login_admin', 1);
-                    return redirect()->route("ADMIN_DASHBOARD");
-                }else {
-                    $request->session()->flash('success_login_user', 1);
-                    return redirect()->route("CLIENT_HOME");
-                }
+    public function postLogin(VALIDATE_ADMIN_LOGIN $request){
+        
+        $dataLogin = array(
+            'email' => strtolower($request->input('email')), 
+            'password' => $request->input('password') 
+        );
+        /// luôn ghi nhớ password trong session
+        if (Auth::attempt( $dataLogin, true ))
+        {
+            ///login thành công
+            if (Gate::allows('IS_ADMIN')) {
+                $request->session()->flash($this->LOGIN_ADMIN_SUCCESS, true);
+                return redirect()->route("ADMIN_DASHBOARD");
             }else {
-                return redirect()->back()->with('errors', 'đăng nhập thất bại!!! ');
+                $request->session()->flash($this->LOGIN_CLIENT_SUCCESS, true);
+                return redirect()->route("CLIENT_HOME");
             }
+        }else {
+            return redirect()->back()->with($this->LOGIN_ERROR, 'đăng nhập thất bại!!! ');
         }
     }
     public function logout(){

@@ -16,9 +16,14 @@
         <div class="login-form-control animated fast fadeIn">
             <form class="login-form" action="{{ Route('ADMIN_POST_LOGIN') }}" method="POST" >
                 {!! csrf_field() !!}
-                @if(session()->has('errors'))
+                @if (Session::has('LOGIN_ERROR'))
                 <div class="alert alert-warning">
-                    {{ session()->get('errors') }}
+                    {{ Session::get('LOGIN_ERROR') }}
+                </div>
+                @endif
+                @if($errors->any())
+                <div class="alert alert-danger">
+                    đã có lỗi, vui lòng kiểm tra lại
                 </div>
                 @endif
                 <h1 class="title"> Welcome Admin </h1>
@@ -26,10 +31,16 @@
                     <span class="svg-icon"> @include ("genneral/svg/email") </span>
                     <input name="email" ref="email" type="text" autoCorrect="off" autoCapitalize="none" class="input-control" placeholder="Email Address" />
                 </div>
+                @if($errors->has('email'))
+                    <div class="text-danger text-left">{{ $errors->first('email') }}</div>
+                @endif
                 <div class="input-group">
                     <span class="svg-icon"> @include ("genneral/svg/password") </span>
                     <input name="password" ref="password" type="password" autoCorrect="off" autoCapitalize="none" class="input-control" placeholder="Password" />
                 </div>
+                @if($errors->has('password'))
+                    <div class="text-danger text-left">{{ $errors->first('password') }}</div>
+                @endif
                 <button type="submit" class="btn btn-login blue-gradient-rgba">
                     Log In Admin
                 </button>

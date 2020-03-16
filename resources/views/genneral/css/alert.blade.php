@@ -17,6 +17,11 @@
         background-color: #d4edda;
         border-color: #c3e6cb;
     }
+    .alert-danger{
+        color: #721c24; 
+        background-color: #f8d7da; 
+        border-color: #f5c6cb;
+    }
     .alert a {
         cursor: pointer;
         text-decoration: none;
