@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\CategoryModel;
+use App\Model\CategoryTypeModel;
+use App\Model\PostModel;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -10,20 +13,13 @@ class AdminController extends Controller
         return view('admin.dashboard');
     }
 
-    public function insertPost(Request $request){
-        
-        $tag_activity = array();
-        $topics       = (new TopicModel())->all();
-        $tags         = (new TagModel())->all();
-        /// get data input
-        $slug         = isset( $args['slug'] ) ? $args['slug'] : null ;
-        ///get error and data old
-        $messages   = $this->container->flash->getMessages();
-        if(!empty($messages)){
-            @list( 'post' => $post, 'errors' => $errors ) = $messages[static::$DF_ERROR_SAVE_POST][0];
-        }
+    public function insertPost($slug = null){
+
+        $categories = (new CategoryModel())->all();
+        $types      = (new CategoryTypeModel())->all();
+
         /// if is first request => old data null
-        if( empty( $post ) ){
+        if( $slug ){
 
             $postModel = new PostModel();
             $post = $postModel->getPostBySlug( $slug );
