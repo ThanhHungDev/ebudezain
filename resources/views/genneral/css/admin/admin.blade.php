@@ -136,7 +136,7 @@
     }
     .admin-main-content .page-title {
         background: rgba(255, 255, 255, 0.55);
-        padding: 40px;
+        padding: 15px 40px 0 40px;
         text-align: left;
     }
     .admin-main-content .page-title .headding {

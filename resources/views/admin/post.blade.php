@@ -23,7 +23,6 @@
             </div>
             <form class="row" action="{{ Route('ADMIN_POST_INSERT_POST') }}" method="POST">
                 {!! csrf_field() !!}
-                <input type="hidden" name="edit" value="{{ $post['id'] }}">
                 <div class="col-8 col-lg-12">
                     <div class="row block-content">
                         <div class="col-12 bg-white shadows-1 px-4 py-4" id="js-check-slug">
