@@ -21,7 +21,7 @@ Route::group(['prefix' => 'admin'], function () {
 
         Route::get('/dashboard','AdminController@dashboard')->name('ADMIN_DASHBOARD');
         Route::get('/post/{slug?}','AdminController@insertPost')->name('ADMIN_INSERT_POST');
-        Route::post('/post/{slug}','AdminController@savePost')->name('ADMIN_POST_INSERT_POST');
+        Route::post('/post','AdminController@savePost')->name('ADMIN_POST_INSERT_POST');
         
     });
 });

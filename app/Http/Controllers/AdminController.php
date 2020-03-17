@@ -15,6 +15,22 @@ class AdminController extends Controller
 
     public function insertPost($slug = null){
 
+        $post = array(
+            'id'               => null,
+            'title'            => null,
+            'slug'             => null,
+            "excerpt"          => null,
+            "content"          => null,
+            "thumbnail"        => null,
+            "category_type_id" => null,
+            "like"             => null,
+            'view'             => null,
+            "publish"          => null,
+            "site_name"        => null,
+            "image_seo"        => null,
+            "keyword_seo"      => null,
+            "description_seo"  => null
+        );
         $categories = (new CategoryModel())->all();
         $types      = (new CategoryTypeModel())->all();
 
@@ -22,16 +38,11 @@ class AdminController extends Controller
         if( $slug ){
 
             $postModel = new PostModel();
-            $post = $postModel->getPostBySlug( $slug );
-            if( $post ){
-                /// get tag activity
-                $tag_activity = $post->getTagActivity();
+            $postBySlug = $postModel->getPostBySlug( $slug );
+            if($postBySlug){
+                $post = $postBySlug;
             }
         }
-        return $this->container->view->render( 
-            $res , 'admin/post-save.twig' , 
-            compact( [ 'post' , 'errors', 'topics', 'tags', 'tag_activity'] ) 
-        );
-        return view('admin.post');
+        return view('admin.post', ['post' => $post]);
     }
 }

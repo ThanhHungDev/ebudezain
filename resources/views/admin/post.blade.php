@@ -23,33 +23,33 @@
             </div>
             <form class="row" action="{{ Route('ADMIN_POST_INSERT_POST') }}" method="POST">
                 {!! csrf_field() !!}
-                <input type="hidden" name="edit" value="{{post.id}}">
+                <input type="hidden" name="edit" value="{{ $post['id'] }}">
                 <div class="col-8 col-lg-12">
                     <div class="row block-content">
                         <div class="col-12 bg-white shadows-1 px-4 py-4" id="js-check-slug">
                             <h2 class="title">title post</h2>
                             <input name="title" type="text" 
-                                value="{{ post.title }}"
+                                value="{{ $post['title'] }}"
                                 onblur="isExistSlug('js-check-slug')" />
-                            <input name="slug" type="hidden" value="{{post.slug}}" />
+                            <input name="slug" type="hidden" value="{{ $post['slug'] }}" />
                         </div>
                     </div>
                     <div class="row block-content">
                         <div class="col-12 bg-white shadows-1 px-4 py-4">
                             <h2 class="title">content</h2>
-                            <textarea name="content" id="editor1" class="h-100">{{ post.content }}</textarea>
+                            <textarea name="content" id="editor1" class="h-100">{{ $post['content'] }}</textarea>
                         </div>
                     </div>
                     <div class="row block-content">
                         <div class="col-12 bg-white shadows-1 px-4 py-4">
                             <h2 class="title">meta keyword</h2>
-                            <textarea name="keyword" cols="30" rows="10">{{ post.keyword }}</textarea>
+                            <textarea name="keyword" cols="30" rows="10">{{ $post['keyword_seo'] }}</textarea>
                         </div>
                     </div>
                     <div class="row block-content">
                         <div class="col-12 bg-white shadows-1 px-4 py-4">
                             <h2 class="title">meta description</h2>
-                            <textarea name="description" cols="30" rows="10">{{ post.description }}</textarea>
+                            <textarea name="description" cols="30" rows="10">{{ $post['description_seo'] }}</textarea>
                         </div>
                     </div>
                 </div>
@@ -59,7 +59,7 @@
                             <section class="pb-4">
                                 <h2 class="title text-center">bấm lưu mới 1 post</h2>
                                 <div class="text-center">
-                                    <button {% if post.id is empty %}disabled{% endif %}
+                                    <button @if($post["id"]) disabled @endif
                                      type="submit" 
                                         class="btn bg-success-color-dark text-white">
                                         Save
@@ -73,14 +73,6 @@
                             <section class="pb-4">
                                 <h2 class="title text-center">chọn topic</h2>
                                 <div class="text-center">
-                                    {% if topics %}
-                                    <select name="topic_id" class="js-multi-tag w-100">
-                                    {% for topic in topics %}
-                                    <option {% if topic.id == post.topic_id %}selected{% endif %}
-                                     value="{{topic.id}}">{{topic.name}}</option>
-                                    {% endfor %}
-                                    </select>
-                                    {% endif %}
                                 </div>
                             </section>
                         </div>
@@ -90,14 +82,6 @@
                             <section class="pb-4">
                                 <h2 class="title text-center">chọn tag</h2>
                                 <div class="text-center">
-                                    {% if tags %}
-                                    <select name="tag_id[]" class="js-multi-tag w-100" multiple="multiple">
-                                    {% for tag in tags %}
-                                    <option {% if tag.id in tag_activity %}selected{% endif %}
-                                        value="{{tag.id}}">{{tag.name}}</option>
-                                    {% endfor %}
-                                    </select>
-                                    {% endif %}
                                 </div>
                             </section>
                         </div>
@@ -114,10 +98,7 @@
                                 </div>
                                 <div id="thumbnail-topic">
                                     <input name="thumbnail" class="thumbnail-topic pb-2" 
-                                        type="text" value="{{ post.image }}" />
-                                    {% if post.image %}
-                                    <img src="{{ post.image }}" class="output-image-finder">
-                                    {% endif %}
+                                        type="text" value="{{ $post['image_seo'] }}" />
                                     
                                 </div>
                             </section>

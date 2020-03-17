@@ -16,9 +16,7 @@ class PostModel extends Model
 
     public function getPostBySlug($slug){
 
-        return $this->where('slug', $slug)
-        ->take(1)
-        ->findOrFail();
+        return $this->where('slug', $slug)->take(1)->get();
     }
 
 }
