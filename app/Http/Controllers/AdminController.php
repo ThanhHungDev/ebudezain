@@ -17,4 +17,8 @@ class AdminController extends Controller
 
         return view('admin.post');
     }
+
+    public function deleteSlug(Request $request){
+        return '34234';
+    }
 }
