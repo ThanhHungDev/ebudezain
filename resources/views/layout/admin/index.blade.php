@@ -31,9 +31,8 @@
 <script src="{{ base_url() ~ '/ckeditor/ckeditor.js' }}"></script>
 <script src="{{ base_url() ~ '/ckfinder/ckfinder.js' }}"></script>
 {% block customScript %}{% endblock %}
-<script src="{{ base_url() ~ '/jquery.min.js'}}"></script>
 <script>
-    var SYSTEM_DELETE_SLUG_ACTION = "{{ path_for('ADMIN_DELETE_SLUG')}}";
+    var SYSTEM_DELETE_SLUG_ACTION = "{{ Route('ADMIN_DELETE_SLUG')}}";
 
     $(document).ready(function() {
         if($('.js-multi-tag').length){
@@ -117,17 +116,13 @@
         return slug;
     }
     function isExistSlug( elementId ){
-        var is_add = SYSTEM_IS_ADD == 'true' ? true : false;
-        var old_slug = "{{topic.slug}}";
-        var _DEFINNE_SYSTEM_ACTION_CHECK_SLUG = "{{ path_for('GET_SLUG', {'slug' : ''} ) }}"
+        var _DEFINNE_SYSTEM_ACTION_CHECK_SLUG = "{{ Route('ADMIN_GET_SLUG', {'slug' : ''} ) }}"
         var title = $( '#'+elementId + " input" ).val();
         var slug = createSlug( title );
         /// reset slug input
         $( "input[name=slug]").val( slug );
-        if( is_add || ( !is_add && slug != old_slug ) ) 
+        if( slug ){
             $("button[type=submit]").attr('disabled', true );
-        if( slug == old_slug ){
-            $("button[type=submit]").attr('disabled', false );
         }
         if( !slug ){
             $(".result-slug").remove();
@@ -148,7 +143,7 @@
                 parag.textContent   = DF_SLUG_EXIST ? "slug đã tồn tại" : "slug chưa sử dụng";
                 document.getElementById("js-check-slug").appendChild( parag );
                 if( !DF_SLUG_EXIST ){
-                    if( is_add || ( !is_add && slug != old_slug) ) 
+                    if( slug ) 
                         $("button[type=submit]").attr('disabled', false );
                 }
             }

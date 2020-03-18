@@ -14,5 +14,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::post('/post','AdminController@savePost')->name('ADMIN_POST_INSERT_POST');
         
         Route::delete('/delete/{slug}','AdminController@deleteSlug')->name('ADMIN_DELETE_SLUG');
+        Route::get('/slug/{slug?}','AdminController@slug')->name('ADMIN_GET_SLUG');
+        
     });
 });
