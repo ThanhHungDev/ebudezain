@@ -15,6 +15,9 @@ Route::group(['prefix' => 'admin'], function () {
         
         Route::delete('/delete/{slug}','AdminController@deleteSlug')->name('ADMIN_DELETE_SLUG');
         Route::get('/slug/{slug?}','AdminController@slug')->name('ADMIN_GET_SLUG');
-        
+        Route::get('/typesByCategory', 'AdminController@categoryTypesByCategoryId')->name('ADMIN_GET_TYPE_BY_CATEGORY');
+        Route::get('/stylesByCategory', 'AdminController@categoryStylesByCategoryId')->name('ADMIN_GET_STYLE_BY_CATEGORY');
+        Route::get('/categoryByType', 'AdminController@categoryByTypeId')->name('ADMIN_GET_CATEGORY_BY_TYPE');
+        Route::get('/stylesByType', 'AdminController@categoryStylesByTypeId')->name('ADMIN_GET_STYLE_BY_TYPE');
     });
 });

@@ -55,6 +55,20 @@ class DatabaseSeeder extends Seeder
                 'description_seo' => '美しいウェブサイトインターフェース、プロフェッショナルなウェブサイトデザイン、評判のSEO基準、高速なウェブデザイン時間、最も安い価格を保管してください。',
                 'created_at'      => date('Y-m-d H:i:s'),
                 'updated_at'      => date('Y-m-d H:i:s')
+            ],
+            [
+                'name'            => '店舗テンプレート category',
+                'slug'            => '店舗テンプレート category',
+                'excerpt'         => '1000を超える非常に美しく、常に更新されるWebインターフェイス',
+                'thumbnail'       => null,
+                'background'      => null,
+                'description'     => '自分のスタイルに合わせて簡単に変更',
+                'site_name'         => 'プロのSEOウェブデザイン、モバイル互換性',
+                'image_seo'       => null,
+                'keyword_seo'     => '',
+                'description_seo' => '美しいウェブサイトインターフェース、プロフェッショナルなウェブサイトデザイン、評判のSEO基準、高速なウェブデザイン時間、最も安い価格を保管してください。',
+                'created_at'      => date('Y-m-d H:i:s'),
+                'updated_at'      => date('Y-m-d H:i:s')
             ]
         ]);
         // name	slug excerpt thumbnail	background	description	product_category_id	image_seo	
@@ -78,12 +92,106 @@ class DatabaseSeeder extends Seeder
                 ],
                 [
                     'name'            => 'giới nthieeuj công ty',
-                    'slug'            => 'giới thiệu công ty',
+                    'slug'            => 'gioi-thieu-cong-ty',
                     'excerpt'         => 'giới thiệu công ty',
                     'thumbnail'       => null,
                     'background'      => null,
                     'description'     => 'fgjdgnfdj',
                     'category_id'     => 1,
+                    'site_name'       => 'kho giao diện đẹp thương mại điện tử',
+                    'image_seo'       => null,
+                    'keyword_seo'     => 'giới thiệu công ty',
+                    'description_seo' => 'giới thiệu công ty',
+                    'created_at'      => date('Y-m-d H:i:s'),
+                    'updated_at'      => date('Y-m-d H:i:s')
+                ],
+                [
+                    'name'            => 'giới nthieeuj công ty 3',
+                    'slug'            => 'gioi-thieu-cong-ty',
+                    'excerpt'         => 'giới thiệu công ty',
+                    'thumbnail'       => null,
+                    'background'      => null,
+                    'description'     => 'fgjdgnfdj',
+                    'category_id'     => 2,
+                    'site_name'       => 'kho giao diện đẹp thương mại điện tử',
+                    'image_seo'       => null,
+                    'keyword_seo'     => 'giới thiệu công ty',
+                    'description_seo' => 'giới thiệu công ty',
+                    'created_at'      => date('Y-m-d H:i:s'),
+                    'updated_at'      => date('Y-m-d H:i:s')
+                ]
+            ]
+        );
+        DB::table('category_style')->insert(
+            [
+                [
+                    'name'            => 'giao diện thương mại điện tử ahihi đồ ngốc',
+                    'slug'            => 'thuong-mai-dien-tu-ahihi-do-ngoc',
+                    'excerpt'         => 'thương mại điển tử rất có lợi nhuận',
+                    'thumbnail'       => null,
+                    'background'      => null,
+                    'description'     => 'áo thun nam, áo thun nam xuất khẩu, áo thun nam ngoại, áo thun nam chất lượng, áo thun nam giá rẻ, đồng hồ xách tay',
+                    'category_type_id'=> 1,
+                    'site_name'       => 'kho giao diện đẹp thương mại điện tử',
+                    'image_seo'       => null,
+                    'keyword_seo'     => '',
+                    'description_seo' => '',
+                    'created_at'      => date('Y-m-d H:i:s'),
+                    'updated_at'      => date('Y-m-d H:i:s')
+                ],
+                [
+                    'name'            => 'giới nthieeuj công ty ahihi đồ ngu',
+                    'slug'            => 'gioi-thieu-cong-ty-ahihi-do-ngu',
+                    'excerpt'         => 'giới thiệu công ty',
+                    'thumbnail'       => null,
+                    'background'      => null,
+                    'description'     => 'fgjdgnfdj',
+                    'category_type_id'=> 1,
+                    'site_name'       => 'kho giao diện đẹp thương mại điện tử',
+                    'image_seo'       => null,
+                    'keyword_seo'     => 'giới thiệu công ty',
+                    'description_seo' => 'giới thiệu công ty',
+                    'created_at'      => date('Y-m-d H:i:s'),
+                    'updated_at'      => date('Y-m-d H:i:s')
+                ],
+                [
+                    'name'            => 'category style 2 không liên quan 1',
+                    'slug'            => 'category-style-2-khong-lien-quan-1',
+                    'excerpt'         => 'giới thiệu công ty',
+                    'thumbnail'       => null,
+                    'background'      => null,
+                    'description'     => 'fgjdgnfdj',
+                    'category_type_id'=> 2,
+                    'site_name'       => 'kho giao diện đẹp thương mại điện tử',
+                    'image_seo'       => null,
+                    'keyword_seo'     => 'giới thiệu công ty',
+                    'description_seo' => 'giới thiệu công ty',
+                    'created_at'      => date('Y-m-d H:i:s'),
+                    'updated_at'      => date('Y-m-d H:i:s')
+                ],
+                [
+                    'name'            => 'category style 3 có liên quan 1',
+                    'slug'            => 'category-style-3-co-lien-quan-1',
+                    'excerpt'         => 'giới thiệu công ty',
+                    'thumbnail'       => null,
+                    'background'      => null,
+                    'description'     => 'fgjdgnfdj',
+                    'category_type_id'=> 1,
+                    'site_name'       => 'kho giao diện đẹp thương mại điện tử',
+                    'image_seo'       => null,
+                    'keyword_seo'     => 'giới thiệu công ty',
+                    'description_seo' => 'giới thiệu công ty',
+                    'created_at'      => date('Y-m-d H:i:s'),
+                    'updated_at'      => date('Y-m-d H:i:s')
+                ],
+                [
+                    'name'            => 'giới thiệu ahihi hùng đẹp trai',
+                    'slug'            => 'gioi-thieu-ahihi-hung-dep-trai',
+                    'excerpt'         => 'giới thiệu công ty',
+                    'thumbnail'       => null,
+                    'background'      => null,
+                    'description'     => 'fgjdgnfdj',
+                    'category_type_id'=> 3,
                     'site_name'       => 'kho giao diện đẹp thương mại điện tử',
                     'image_seo'       => null,
                     'keyword_seo'     => 'giới thiệu công ty',

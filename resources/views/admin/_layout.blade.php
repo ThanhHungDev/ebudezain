@@ -13,8 +13,13 @@
     @include ("genneral/css/alert")
     @yield('css_custom_page')
     <script>
-        const SYSTEM_DELETE_SLUG_ACTION = "{{ Route('ADMIN_DELETE_SLUG', ['slug' => null])}}";
-        const ACTION_CHECK_SLUG         = "{{ Route('ADMIN_GET_SLUG', ['slug' => '/'] ) }}"
+        const SYSTEM_DELETE_SLUG_ACTION   = "{{ Route('ADMIN_DELETE_SLUG', ['slug' => null])}}";
+        const ACTION_CHECK_SLUG           = "{{ Route('ADMIN_GET_SLUG', ['slug' => '/'] ) }}";
+        const ADMIN_GET_TYPE_BY_CATEGORY  = "{{ Route('ADMIN_GET_TYPE_BY_CATEGORY') }}";
+        const ADMIN_GET_STYLE_BY_CATEGORY = "{{ Route('ADMIN_GET_STYLE_BY_CATEGORY') }}";
+        const ADMIN_GET_CATEGORY_BY_TYPE  = "{{ Route('ADMIN_GET_CATEGORY_BY_TYPE') }}";
+        const ADMIN_GET_STYLE_BY_TYPE     = "{{ Route('ADMIN_GET_STYLE_BY_TYPE') }}";
+        
     </script>
 </head>
 <body>

@@ -20,9 +20,6 @@ function validateForm(formJquery){
                 required : true,
                 maxlength: 255
             },
-            category_type_id : {
-                required : true
-            }, 
             site_name : {
                 required : true,
                 maxlength: 255
@@ -60,9 +57,6 @@ function validateForm(formJquery){
                 required : "cần thêm link thumbnail",
                 maxlength: "đường link vượt 255 kí tự"
             },
-            category_type_id : {
-                required : "cần thêm category type cho bài đăng"
-            }, 
             site_name : {
                 required : "cần thêm site_name cho seo",
                 maxlength: "phần site_name không vượt quá 255 kí tự"
@@ -237,22 +231,131 @@ function showResultSlugExisted(result){
         $("button[type=submit]").attr('disabled', false );
     }
 }
+function changeCategoryType(classCategory, classCategoryStyle, element){
+    var id = element.value;
 
+    if( typeof ADMIN_GET_CATEGORY_BY_TYPE == 'undefined' || typeof ADMIN_GET_STYLE_BY_TYPE == 'undefined'){
+        showErrorSystem('changeCategoryType');
+        return false;
+    }
+    $.ajax({
+        type: "GET",
+        url: ADMIN_GET_CATEGORY_BY_TYPE,
+        data : { id },
+        dataType:"JSON",
+        success: function(response){
+            showCategory(classCategory, response.data)
+        }
+    });
+    $.ajax({
+        type: "GET",
+        url: ADMIN_GET_STYLE_BY_TYPE,
+        data : { id },
+        dataType:"JSON",
+        success: function(response){
+            showCategoryStyle(classCategoryStyle, response.data)
+        }
+    });
+}
+function changeCategory(classCategoryType, classCategoryStyle, element){
+    var id = element.value;
+
+    if(typeof ADMIN_GET_TYPE_BY_CATEGORY == 'undefined' || typeof ADMIN_GET_STYLE_BY_CATEGORY == 'undefined'){
+        showErrorSystem('ADMIN_GET_TYPE');
+        return false;
+    }
+    $.ajax({
+        type: "GET",
+        url: ADMIN_GET_TYPE_BY_CATEGORY,
+        data : { id },
+        dataType:"JSON",
+        success: function(response){
+            showCategoryType(classCategoryType, response.data)
+        }
+    });
+    $.ajax({
+        type: "GET",
+        url: ADMIN_GET_STYLE_BY_CATEGORY,
+        data : { id },
+        dataType:"JSON",
+        success: function(response){
+            showCategoryStyle(classCategoryStyle, response.data)
+        }
+    });
+}
+function showCategoryType(classCategoryType, types){
+    var selectorJqueryCategoryType = "." + classCategoryType;
+    var jqueryCategoryType         = $(selectorJqueryCategoryType);
+    var oldSelectedCategoryType    = jqueryCategoryType.val();
+    // console.log(oldSelectedCategoryType);
+    // console.log(types);
+
+    var options = [];
+    for(var index = 0; index < types.length; index ++ ){
+        var valueOpt = types[index].id;
+        var textOpt  = types[index].name;
+        var isSelect = types[index].id == oldSelectedCategoryType;
+        options.push(createOptionSelect(valueOpt, textOpt, isSelect));
+    }
+
+    jqueryCategoryType.find('option').remove();
+    jqueryCategoryType.append(options);
+    runSelect2(jqueryCategoryType);
+}
+function showCategoryStyle(classCategoryStyle, styles){
+    var selectorJqueryCategoryStyle = "." + classCategoryStyle;
+    var jqueryCategoryStyle         = $(selectorJqueryCategoryStyle);
+    console.log(styles);
+
+    var options = [];
+    for(var index = 0; index < styles.length; index ++ ){
+        var valueOpt = styles[index].id;
+        var textOpt  = styles[index].name;
+        var isSelect = false;
+        options.push(createOptionSelect(valueOpt, textOpt, isSelect));
+    }
+
+    jqueryCategoryStyle.find('option').remove();
+    jqueryCategoryStyle.append(options);
+    runSelect2(jqueryCategoryStyle);
+}
+function showCategory( classCategory, categories){
+    var selectorJqueryCategory = "." + classCategory;
+    var jqueryCategory        = $(selectorJqueryCategory);
+    // var oldSelectedCategory    = jqueryCategory.val();
+    
+    var valueActive = "";
+    if(typeof categories[0] != 'undefined' && typeof categories[0]['id'] != 'undefined'){
+        valueActive = categories[0]['id'];
+    }
+    console.log(valueActive);
+
+    jqueryCategory.val(valueActive);
+    runSelect2(jqueryCategory);
+}
+
+
+function createOptionSelect( value, text, isSelect ){
+    return "<option value='"+ value + "' " + (isSelect ? 'selected' : '' ) + ">" + text + " </option>"
+}
+function runSelect2(dom){
+    dom.select2(
+        { 
+            language: {
+                noResults: function(){
+                    return "không có kết quả trùng khớp";
+                }
+            },
+        }
+    );
+}
 
 /// dom load success
 $(document).ready(function() {
 
     var multiSelect = $('.js-multi-select');
     if(multiSelect.length){
-        multiSelect.select2(
-            { 
-                language: {
-                    noResults: function(){
-                        return "không có kết quả trùng khớp";
-                    }
-                },
-            }
-        );
+        runSelect2(multiSelect);
     }
     var DF_FORM_VALIDATE = $(".js-validate-form");
     if(DF_FORM_VALIDATE.length){

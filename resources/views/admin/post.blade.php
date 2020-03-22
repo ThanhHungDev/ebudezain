@@ -91,11 +91,12 @@
                             <section class="pb-4">
                                 <h2 class="title text-center">chọn category</h2>
                                 @if($categories)
-                                <select name="category[]" class="js-multi-select w-100">
-                                @foreach($categories as $category)
-                                <option 
-                                    value="{{ $category->id }}">{{ $category->name }}</option>
-                                @endforeach
+                                <select name="category[]" class="js-multi-select w-100 js-category" 
+                                onchange="changeCategory('js-category-type', 'js-category-style', this)">
+                                    <option value="">chọn thể loại</option>
+                                    @foreach($categories as $category)
+                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                    @endforeach
                                 </select>
                                 @endif
                             </section>
@@ -106,11 +107,12 @@
                             <section class="pb-4">
                                 <h2 class="title text-center">chọn type</h2>
                                 @if($types)
-                                <select name="category_type_id[]" class="js-multi-select w-100">
-                                @foreach($types as $type)
-                                <option 
-                                    value="{{ $type->id }}">{{ $type->name }}</option>
-                                @endforeach
+                                <select name="category_type_id[]" class="js-multi-select w-100 js-category-type"
+                                onchange="changeCategoryType('js-category', 'js-category-style', this)">
+                                    <option value="">chọn loại bài đăng</option>
+                                    @foreach($types as $type)
+                                    <option value="{{ $type->id }}">{{ $type->name }}</option>
+                                    @endforeach
                                 </select>
                                 @endif
                             </section>
@@ -121,7 +123,7 @@
                             <section class="pb-4">
                                 <h2 class="title text-center">chọn style</h2>
                                 @if($styles)
-                                <select name="style[]" class="js-multi-select w-100" multiple="multiple">
+                                <select name="style[]" class="js-multi-select w-100 js-category-style" multiple="multiple">
                                     <option value="">không chọn</option>
                                     @foreach($styles as $style)
                                     <option value="{{ $style->id }}">{{ $style->name }}</option>

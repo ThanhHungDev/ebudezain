@@ -20,4 +20,7 @@ class CategoryTypeModel extends Model
         return $this->hasMany(PostModel::class, 'category_type_id', 'id')->get();
     }
 
+    public function category_style($fillable = null){
+        return $this->hasMany(CategoryStyleModel::class, 'category_type_id', 'id')->get($fillable);
+    }
 }
