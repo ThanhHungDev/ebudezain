@@ -263,6 +263,13 @@
     .error{
         color: #770710;
     }
+    .img-input-append{
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: auto;
+        height: 38px;
+    }
     @media screen and (max-width: 1199.98px){
         .PageTitle {
             text-align: center;

@@ -63,13 +63,13 @@
                     <div class="row block-content">
                         <div class="col-12 bg-white shadows-1 px-4 py-4">
                             <h2 class="title">meta keyword</h2>
-                            <textarea class="height-150px" name="keyword" cols="30" rows="10">{{ old('keyword_seo') }}</textarea>
+                            <textarea class="height-150px" name="keyword_seo" cols="30" rows="10">{{ old('keyword_seo') }}</textarea>
                         </div>
                     </div>
                     <div class="row block-content">
                         <div class="col-12 bg-white shadows-1 px-4 py-4">
                             <h2 class="title">meta description</h2>
-                            <textarea class="height-150px" name="description" cols="30" rows="10">{{ old('description_seo') }}</textarea>
+                            <textarea class="height-150px" name="description_seo" cols="30" rows="10">{{ old('description_seo') }}</textarea>
                         </div>
                     </div>
                 </div>

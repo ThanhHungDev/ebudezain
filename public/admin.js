@@ -115,8 +115,8 @@ function showImageToBrowser( imageSrc, elementId ){
         img_exist[0].remove()
     }
     var blockShow = document.getElementsByClassName( elementId )[0];
-    console.log(blockShow);
-    blockShow.click();
+    // console.log(blockShow);
+    // blockShow.click();
     blockShow.value = imageSrc;
     // blockShow.blur();
     var img_finder           = document.createElement("img");
@@ -131,10 +131,15 @@ function showImageToInput( imageSrc, elementId ){
 
     var img_finder           = document.createElement("img");
         img_finder.src       = imageSrc;
-        img_finder.className = "output-image-finder"
-        
-    var wrapper              = document.getElementById( elementId );
-    wrapper.appendChild(img_finder);
+        img_finder.className = "img-input-append"
+    var wrapperInput = elementId.parentElement;
+    var images = document.getElementsByClassName('img-input-append');
+    for(var index = 0; index < images.length; index ++ ){
+        images[index].remove();
+    }
+    wrapperInput.appendChild(img_finder);
+    var input = wrapperInput.getElementsByTagName('INPUT')[0];
+    input.value = imageSrc;
 }
 
 function selectThumbnailWithCKFinder( elementId ) {
