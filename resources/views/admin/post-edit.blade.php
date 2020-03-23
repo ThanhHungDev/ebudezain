@@ -28,33 +28,33 @@
                     @endif
                 </div>
             </div>
-            <form class="row js-validate-form" action="{{ Route('ADMIN_POST_INSERT_POST') }}" method="POST">
+            <form class="row js-validate-form" action="{{ Route('ADMIN_POST_EDIT_POST', ['slug', $post->id]) }}" method="POST">
                 {!! csrf_field() !!}
                 <div class="col-8 col-lg-12">
                     <div class="row block-content">
                         <div class="col-12 bg-white shadows-1 px-4 py-4" id="js-check-slug">
                             <h2 class="title">title post</h2>
-                            <input name="title" type="text" value="{{ old('title') }}" onblur="isExistSlug('js-check-slug')" />
-                            <input name="slug" type="hidden" value="{{ old('slug') }}" />
+                            <input name="title" type="text" value="{{ old('title', $post->title) }}" onblur="isExistSlug('js-check-slug')" />
+                            <input name="slug" type="hidden" value="{{ old('slug', $post->slug) }}" />
                         </div>
                     </div>
                     
                     <div class="row block-content">
                         <div class="col-12 bg-white shadows-1 px-4 py-4">
                             <h2 class="title">excerpt -- đoạn trích</h2>
-                            <textarea  class="height-150px" name="excerpt" cols="30" rows="10">{{ old('excerpt') }}</textarea>
+                            <textarea  class="height-150px" name="excerpt" cols="30" rows="10">{{ old('excerpt', $post->excerpt) }}</textarea>
                         </div>
                     </div>
                     <div class="row block-content">
                         <div class="col-12 bg-white shadows-1 px-4 py-4">
                             <h2 class="title">content</h2>
-                            <textarea name="content" id="editor1" class="h-100">{{ old('content') }}</textarea>
+                            <textarea name="content" id="editor1" class="h-100">{{ old('content', $post->content) }}</textarea>
                         </div>
                     </div>
                     <div class="row block-content">
                         <div class="col-12 bg-white shadows-1 px-4 py-4" id="js-check-slug">
                             <h2 class="title">site name SEO</h2>
-                            <input name="site_name" type="text" value="{{ old('site_name') }}" />
+                            <input name="site_name" type="text" value="{{ old('site_name', $post->site_name) }}" />
                         </div>
                     </div>
                     <div class="row block-content">

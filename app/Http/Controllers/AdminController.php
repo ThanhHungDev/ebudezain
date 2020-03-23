@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\VALIDATE_SAVE_POST;
 use App\Model\CategoryModel;
 use App\Model\CategoryStyleModel;
 use App\Model\CategoryTypeModel;
+use App\Model\PostActiveStyleModel;
 use App\Model\PostModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -158,5 +160,59 @@ class AdminController extends Controller
             'data'      => $styles
         );
         return response()->json( $data, $status );
+    }
+
+    public function savePost(VALIDATE_SAVE_POST $request){
+
+        $post                   = new PostModel();
+        $post->title            = $request['title'];
+        $post->slug             = $request['slug'];
+        $post->excerpt          = $request['excerpt'];
+        $post->content          = $request['content'];
+        $post->thumbnail        = $request['thumbnail'];
+        $post->category_type_id = $request['category_type_id'];
+        $post->site_name        = $request['site_name'];
+        $post->image_seo        = $request['image_seo'];
+        $post->keyword_seo      = $request['keyword_seo'];
+        $post->description_seo  = $request['description_seo'];
+
+        try{
+            $post->save();
+        }catch (\Exception $e){
+            return redirect()->back()->with('SAVE_ERROR', 'error save post '.$e->getMessage());
+        }
+
+        $styles = $request->category_style_id;
+
+        foreach( $styles as $style ){
+
+            $postActiveStyle           = new PostActiveStyleModel();
+            $postActiveStyle->post_id  = $post->id;
+            $postActiveStyle->style_id = $style;
+
+            try{
+                $postActiveStyle->save();
+            }catch (\Exception $e){
+                return redirect()->back()->with('SAVE_ERROR', 'error save post active style '.$e->getMessage());
+            }
+        }
+        
+        return redirect()->route('ADMIN_GET_EDIT_POST',  ['id' => $post->id]);
+    }
+    public function getEditPost($id){
+        if(!is_numeric($id)){
+            $post = PostModel::first();
+        }else{
+            $post = PostModel::find($id);
+        }
+
+        if($post == null){
+            return redirect()->route('ADMIN_DASHBOARD');
+        }
+        
+        $categories = (new CategoryModel())->all();
+        $types      = (new CategoryTypeModel())->all();
+        $styles     = (new CategoryStyleModel())->all();
+        return view('admin.post-edit', compact(['post', 'categories', 'types', 'styles']));
     }
 }

@@ -12,6 +12,9 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/dashboard','AdminController@dashboard')->name('ADMIN_DASHBOARD');
         Route::get('/post','AdminController@insertPost')->name('ADMIN_INSERT_POST');
         Route::post('/post','AdminController@savePost')->name('ADMIN_POST_INSERT_POST');
+
+        Route::get('/post/{id}','AdminController@getEditPost')->name('ADMIN_GET_EDIT_POST');
+        Route::post('/post/{id}','AdminController@saveEditPost')->name('ADMIN_POST_EDIT_POST');
         
         Route::delete('/delete/{slug}','AdminController@deleteSlug')->name('ADMIN_DELETE_SLUG');
         Route::get('/slug/{slug?}','AdminController@slug')->name('ADMIN_GET_SLUG');
