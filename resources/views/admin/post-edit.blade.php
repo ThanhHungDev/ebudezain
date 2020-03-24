@@ -8,7 +8,7 @@
     <div class="admin-main-content">
         <div class="page-title">
             <div class="clear">
-                <h2 class="headding float-left">insert post </h2>
+                <h2 class="headding float-left">chỉnh sửa bài viết </h2>
             </div>
         </div>
         <div class="admin-wrapper-content-field">
@@ -17,6 +17,11 @@
                     @if (Session::has('SAVE_ERROR'))
                     <div class="alert alert-warning">
                         {{ Session::get('SAVE_ERROR') }}
+                    </div>
+                    @endif
+                    @if (Session::has('SAVE_SUCCESS'))
+                    <div class="alert alert-success">
+                        lưu bài viết thành công
                     </div>
                     @endif
                     @if(!empty($errors->all()))
@@ -98,11 +103,18 @@
                             <section class="pb-4">
                                 <h2 class="title text-center">chọn category</h2>
                                 @if($categories)
+                                @php 
+                                    $categoryTypeActive = $post->type()->first();
+                                    $categoryActive = $categoryTypeActive->category()->first();
+                                    $categoryIdActive = $categoryActive->id;
+                                @endphp
                                 <select name="category" class="js-multi-select w-100 js-category" 
                                 onchange="changeCategory('js-category-type', 'js-category-style', this)">
                                     <option value="">chọn thể loại</option>
                                     @foreach($categories as $category)
-                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+
+                                    <option @if($categoryIdActive == $category->id) {{ 'selected' }} @endif
+                                    value="{{ $category->id }}">{{ $category->name }}</option>
                                     @endforeach
                                 </select>
                                 @endif
@@ -118,7 +130,8 @@
                                 onchange="changeCategoryType('js-category', 'js-category-style', this)">
                                     <option value="">chọn loại bài đăng</option>
                                     @foreach($types as $type)
-                                    <option value="{{ $type->id }}">{{ $type->name }}</option>
+                                    <option @if($post->category_type_id == $type->id) {{ 'selected' }} @endif
+                                    value="{{ $type->id }}">{{ $type->name }}</option>
                                     @endforeach
                                 </select>
                                 @endif
@@ -130,10 +143,14 @@
                             <section class="pb-4">
                                 <h2 class="title text-center">chọn style</h2>
                                 @if($styles)
+                                @php 
+                                $stylesActive = $post->category_style()->pluck('category_style.id')->toArray();
+                                @endphp
                                 <select name="category_style_id[]" class="js-multi-select w-100 js-category-style" multiple="multiple">
                                     <option value="">không chọn</option>
                                     @foreach($styles as $style)
-                                    <option value="{{ $style->id }}">{{ $style->name }}</option>
+                                    <option @if(in_array($style->id, $stylesActive)) {{ 'selected' }} @endif
+                                    value="{{ $style->id }}">{{ $style->name }}</option>
                                     @endforeach
                                 </select>
                                 @endif
@@ -153,7 +170,7 @@
                                 </div>
                                 <div id="thumbnail-topic">
                                     <input name="thumbnail" class="thumbnail-topic pb-2" 
-                                        type="text" value="{{ old('image_seo') }}" />
+                                        type="text" value="{{ old('thumbnail', $post->thumbnail) }}" />
                                 </div>
                             </section>
                         </div>
@@ -163,9 +180,6 @@
         </div>
     </div>
 </div>
-@php 
-dd($post->getAll());
-@endphp
 @endsection
 
 @section('js_custom_page')
@@ -179,12 +193,12 @@ if(doms_image_seo.length){
     var dom_image_seo = doms_image_seo[0];
     showImageToInput(value_image_seo, dom_image_seo);
 }
-
-/// change category 
-var domCategoryType =  document.getElementsByName( 'category_type_id' );
- 
-changeCategoryType('js-category', 'js-category-style', domCategoryType);
-
+</script>
+@endif
+@if(old('thumbnail', $post->thumbnail))
+<script>
+var value_thumbnail = "{{ old('thumbnail', $post->thumbnail) }}";
+showImageToBrowser(value_thumbnail, 'thumbnail-topic');
 </script>
 @endif
 @endsection

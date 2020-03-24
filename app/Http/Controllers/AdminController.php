@@ -14,15 +14,9 @@ use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
-    protected $postRepository;
-
-    public function __construct(PostRepositoryInterface $postRepository)
-    {
-        $this->postRepository = $postRepository;
-    }
+    private $SAVE_SUCCESS = 'SAVE_SUCCESS';
 
     public function dashboard(Request $request){
-        dd($this->postRepository->getAll());
         return view('admin.dashboard');
     }
 
@@ -92,7 +86,7 @@ class AdminController extends Controller
             $types = (new CategoryTypeModel())->all(['id', 'name']);
         }else{
             $category = (new CategoryModel())->where('id', $categoryId)->first();
-            $types = $category->category_type(['id', 'name']);
+            $types = $category->category_type()->get(['id', 'name']);
         }
 
         $status = 200;
@@ -158,7 +152,7 @@ class AdminController extends Controller
             $styles = (new CategoryStyleModel())->all(['category_style.id', 'category_style.name']);
         }else{
             $styles = (new CategoryTypeModel())->find($typeId)
-            ->category_style(['category_style.id', 'category_style.name']);
+            ->category_style()->get(['category_style.id', 'category_style.name']);
         }
         
         $status = 200;
@@ -205,7 +199,7 @@ class AdminController extends Controller
                 return redirect()->back()->with('SAVE_ERROR', 'error save post active style '.$e->getMessage());
             }
         }
-        
+        $request->session()->flash($this->SAVE_SUCCESS, true);
         return redirect()->route('ADMIN_GET_EDIT_POST',  ['id' => $post->id]);
     }
     public function getEditPost($id){
