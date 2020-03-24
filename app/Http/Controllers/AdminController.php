@@ -8,12 +8,21 @@ use App\Model\CategoryStyleModel;
 use App\Model\CategoryTypeModel;
 use App\Model\PostActiveStyleModel;
 use App\Model\PostModel;
+use App\Repositories\Contracts\PostRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
+    protected $postRepository;
+
+    public function __construct(PostRepositoryInterface $postRepository)
+    {
+        $this->postRepository = $postRepository;
+    }
+
     public function dashboard(Request $request){
+        dd($this->postRepository->getAll());
         return view('admin.dashboard');
     }
 

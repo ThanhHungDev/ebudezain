@@ -61,7 +61,7 @@
                         <div class="col-12 bg-white shadows-1 px-4 py-4" id="js-check-slug">
                             <h2 class="title">hình ảnh SEO</h2>
                             <div class="position-relative">
-                                <input name="image_seo" type="text" value="{{ old('image_seo') }}" />
+                                <input name="image_seo" type="text" value="{{ old('image_seo', $post->image_seo) }}" />
                                 <button class="btn bg-cyan bd-cyan text-white btn-input-append" 
                                 type="button" onclick="selectImageInputWithCKFinder(this)">chọn ảnh</button>
                             </div>
@@ -70,13 +70,13 @@
                     <div class="row block-content">
                         <div class="col-12 bg-white shadows-1 px-4 py-4">
                             <h2 class="title">meta keyword</h2>
-                            <textarea class="height-150px" name="keyword_seo" cols="30" rows="10">{{ old('keyword_seo') }}</textarea>
+                            <textarea class="height-150px" name="keyword_seo" cols="30" rows="10">{{ old('keyword_seo', $post->keyword_seo) }}</textarea>
                         </div>
                     </div>
                     <div class="row block-content">
                         <div class="col-12 bg-white shadows-1 px-4 py-4">
                             <h2 class="title">meta description</h2>
-                            <textarea class="height-150px" name="description_seo" cols="30" rows="10">{{ old('description_seo') }}</textarea>
+                            <textarea class="height-150px" name="description_seo" cols="30" rows="10">{{ old('description_seo', $post->description_seo) }}</textarea>
                         </div>
                     </div>
                 </div>
@@ -163,4 +163,28 @@
         </div>
     </div>
 </div>
+@php 
+dd($post->getAll());
+@endphp
+@endsection
+
+@section('js_custom_page')
+@if(old('image_seo', $post->image_seo))
+<script>
+var value_image_seo = "{{ old('image_seo', $post->image_seo) }}";
+var doms_image_seo  = document.getElementsByName( 'image_seo' );
+
+if(doms_image_seo.length){
+
+    var dom_image_seo = doms_image_seo[0];
+    showImageToInput(value_image_seo, dom_image_seo);
+}
+
+/// change category 
+var domCategoryType =  document.getElementsByName( 'category_type_id' );
+ 
+changeCategoryType('js-category', 'js-category-style', domCategoryType);
+
+</script>
+@endif
 @endsection

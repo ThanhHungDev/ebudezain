@@ -40,5 +40,6 @@
     <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
     <script src="{{ asset('ckfinder/ckfinder.js') }}"></script>
     <script src="{{ asset('admin.js') }}"></script>
+    @yield('js_custom_page')
 </body>
 </html>

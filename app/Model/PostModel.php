@@ -19,4 +19,13 @@ class PostModel extends Model
         return $this->where('slug', $slug)->take(1)->get();
     }
 
+    public function getCategoryId($slug){
+
+        return $this->where('slug', $slug)->take(1)->get();
+    }
+
+    public function getAll(){
+        return $this->all();
+    }
+
 }
