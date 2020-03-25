@@ -202,6 +202,7 @@ class AdminController extends Controller
         $request->session()->flash($this->SAVE_SUCCESS, true);
         return redirect()->route('ADMIN_GET_EDIT_POST',  ['id' => $post->id]);
     }
+
     public function getEditPost($id){
         if(!is_numeric($id)){
             $post = PostModel::first();
@@ -217,5 +218,59 @@ class AdminController extends Controller
         $types      = (new CategoryTypeModel())->all();
         $styles     = (new CategoryStyleModel())->all();
         return view('admin.post-edit', compact(['post', 'categories', 'types', 'styles']));
+    }
+
+    public function posts(Request $request){
+        $limit = 20;
+        $posts = (new PostModel())->paginate($limit);
+        return view('admin.post-list', compact(['posts']));
+    }
+
+    public function saveEditPost(VALIDATE_SAVE_POST $request, $id){
+        
+        $post                   = (new PostModel())->find($id);
+        $post->title            = $request['title'];
+        $post->slug             = $request['slug'];
+        $post->excerpt          = $request['excerpt'];
+        $post->content          = $request['content'];
+        $post->thumbnail        = $request['thumbnail'];
+        $post->category_type_id = $request['category_type_id'];
+        $post->site_name        = $request['site_name'];
+        $post->image_seo        = $request['image_seo'];
+        $post->keyword_seo      = $request['keyword_seo'];
+        $post->description_seo  = $request['description_seo'];
+
+        try{
+            $post->save();
+        }catch (\Exception $e){
+            return redirect()->back()->with('SAVE_ERROR', 'error save post '.$e->getMessage());
+        }
+
+        $styles = $request->category_style_id;
+        (new PostActiveStyleModel())->removeByPostId($post->id);
+
+        foreach( $styles as $style ){
+
+            $postActiveStyle           = new PostActiveStyleModel();
+            $postActiveStyle->post_id  = $post->id;
+            $postActiveStyle->style_id = $style;
+
+            try{
+                $postActiveStyle->save();
+            }catch (\Exception $e){
+                return redirect()->back()->with('SAVE_ERROR', 'error save post active style '.$e->getMessage());
+            }
+        }
+        $request->session()->flash($this->SAVE_SUCCESS, true);
+        return redirect()->route('ADMIN_GET_EDIT_POST',  ['id' => $post->id]);
+    }
+
+    public function deletePost($id = 0){
+
+        (new PostModel())->find($id)->delete();
+
+        $status = 200;
+        $response = array( 'status' => $status, 'message' => 'success' );
+        return response()->json( $response );
     }
 }

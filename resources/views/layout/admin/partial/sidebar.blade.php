@@ -19,7 +19,8 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a class="{{ Route::is("ADMIN_GET_LIST_POST") ? 'active' : null}}"
+                    href="{{ route('ADMIN_GET_LIST_POST') }}">
                         Xem danh sách post
                     </a>
                 </li>

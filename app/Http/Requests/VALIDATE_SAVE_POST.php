@@ -22,7 +22,7 @@ class VALIDATE_SAVE_POST extends FormRequest
             'title'            => 'required|max:255',
             'slug'             => 'required|max:255',
             'excerpt'          => 'required|max:255',
-            'content'          => 'required|max:255',
+            'content'          => 'required',
             'thumbnail'        => 'required|max:255',
             'category_type_id' => 'required|max:255',
             'site_name'        => 'required|max:255',

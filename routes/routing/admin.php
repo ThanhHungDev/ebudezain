@@ -15,8 +15,11 @@ Route::group(['prefix' => 'admin'], function () {
 
         Route::get('/post/{id}','AdminController@getEditPost')->name('ADMIN_GET_EDIT_POST');
         Route::post('/post/{id}','AdminController@saveEditPost')->name('ADMIN_POST_EDIT_POST');
+        Route::get('/posts','AdminController@posts')->name('ADMIN_GET_LIST_POST');
+        Route::delete('/post/{id?}','AdminController@deletePost')->name('ADMIN_DELETE_POST');
         
         Route::delete('/delete/{slug}','AdminController@deleteSlug')->name('ADMIN_DELETE_SLUG');
+
         Route::get('/slug/{slug?}','AdminController@slug')->name('ADMIN_GET_SLUG');
         Route::get('/typesByCategory', 'AdminController@categoryTypesByCategoryId')->name('ADMIN_GET_TYPE_BY_CATEGORY');
         Route::get('/stylesByCategory', 'AdminController@categoryStylesByCategoryId')->name('ADMIN_GET_STYLE_BY_CATEGORY');

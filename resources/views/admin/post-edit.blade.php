@@ -1,3 +1,4 @@
+
 @extends('admin._layout')
 
 @section('title', 'Thêm bài viết')
@@ -106,13 +107,12 @@
                                 @php 
                                     $categoryTypeActive = $post->type()->first();
                                     $categoryActive = $categoryTypeActive->category()->first();
-                                    $categoryIdActive = $categoryActive->id;
+                                    $categoryIdActive = old('category', $categoryActive->id);
                                 @endphp
-                                <select name="category" class="js-multi-select w-100 js-category" 
+                                <select name="category" class="js-multi-select js-category" 
                                 onchange="changeCategory('js-category-type', 'js-category-style', this)">
                                     <option value="">chọn thể loại</option>
                                     @foreach($categories as $category)
-
                                     <option @if($categoryIdActive == $category->id) {{ 'selected' }} @endif
                                     value="{{ $category->id }}">{{ $category->name }}</option>
                                     @endforeach
@@ -126,11 +126,11 @@
                             <section class="pb-4">
                                 <h2 class="title text-center">chọn type</h2>
                                 @if($types)
-                                <select name="category_type_id" class="js-multi-select w-100 js-category-type"
+                                <select name="category_type_id" class="js-multi-select js-category-type"
                                 onchange="changeCategoryType('js-category', 'js-category-style', this)">
                                     <option value="">chọn loại bài đăng</option>
                                     @foreach($types as $type)
-                                    <option @if($post->category_type_id == $type->id) {{ 'selected' }} @endif
+                                    <option @if(old('category_type_id', $post->category_type_id) == $type->id) {{ 'selected' }} @endif
                                     value="{{ $type->id }}">{{ $type->name }}</option>
                                     @endforeach
                                 </select>
@@ -146,10 +146,10 @@
                                 @php 
                                 $stylesActive = $post->category_style()->pluck('category_style.id')->toArray();
                                 @endphp
-                                <select name="category_style_id[]" class="js-multi-select w-100 js-category-style" multiple="multiple">
+                                <select name="category_style_id[]" class="js-multi-select js-category-style" multiple="multiple">
                                     <option value="">không chọn</option>
                                     @foreach($styles as $style)
-                                    <option @if(in_array($style->id, $stylesActive)) {{ 'selected' }} @endif
+                                    <option @if(in_array($style->id, old('category_style_id', $stylesActive))) {{ 'selected' }} @endif
                                     value="{{ $style->id }}">{{ $style->name }}</option>
                                     @endforeach
                                 </select>
