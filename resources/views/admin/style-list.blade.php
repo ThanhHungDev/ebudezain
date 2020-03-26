@@ -8,7 +8,7 @@
     <div class="admin-main-content">
         <div class="page-title">
             <div class="clear">
-                <h2 class="headding float-left">danh sách bài đăng</h2>
+                <h2 class="headding float-left">danh sách style </h2>
             </div>
         </div>
         <div class="admin-wrapper-content-field">
@@ -18,25 +18,25 @@
                         <table class="table table-hover">
                             <thead>
                                 <tr>
-                                    <th>title</th>
+                                    <th>name</th>
                                     <th>keyword</th>
                                     <th>description</th>
                                     <th>#remove#</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach( $posts as $post)
+                                @foreach( $styles as $style)
                                 <tr>
                                     <td>
-                                        <a href="{{ Route("ADMIN_GET_EDIT_POST", ['id' =>  $post->id]) }}">
-                                            {{ limitText($post->title, 30) }}
+                                        <a href="{{ Route("ADMIN_GET_EDIT_POST", ['id' =>  $style->id]) }}">
+                                            {{ limitText($style->name, 30) }}
                                         </a>
                                     </td>
-                                    <td>{{ limitText($post->keyword_seo, 30) }}</td>
-                                    <td>{{ limitText($post->description_seo, 30) }}</td>
+                                    <td>{{ limitText($style->keyword_seo, 30) }}</td>
+                                    <td>{{ limitText($style->description_seo, 30) }}</td>
                                     <td>
                                         <button type="button"
-                                        onclick="deleteSlug('{{ $post->id }}', this)"
+                                        onclick="deleteSlug('{{ $style->id }}', this)"
                                         class="bg-transparent btn-remove-row">
                                             @include ("genneral/svg/remove")
                                         </button>
@@ -56,7 +56,7 @@
 
 @section('js_custom_page')
 <script>
-    var ADMIN_DELETE_POST = "{{ Route('ADMIN_DELETE_POST', ['id' => null ])}}";
+    var ADMIN_DELETE_STYLE = "{{ Route('ADMIN_DELETE_STYLE', ['id' => null ])}}";
     function deleteSlug( id, element ){
         $.ajaxSetup({
             headers: {
@@ -65,7 +65,7 @@
         });
         $.ajax({
             type: "DELETE",
-            url: ADMIN_DELETE_POST + '/' +id , 
+            url: ADMIN_DELETE_STYLE + '/' +id , 
             data : {},
             dataType:"JSON",
             success: function(response){

@@ -30,13 +30,14 @@
             <a class="block-session">Thể loại</a>
             <ul class="submenu">
                 <li>
-                    <a class="{{ Route::is("ADMIN_INSERT_POST") ? 'activec' : null}}"
-                        href="{{ route('ADMIN_INSERT_POST') }}">
+                    <a class="{{ Route::is("ADMIN_INSERT_CATEGORY") ? 'active' : null}}"
+                        href="{{ route('ADMIN_INSERT_CATEGORY') }}">
                         Thêm thể loại
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a class="{{ Route::is("ADMIN_LIST_CATEGORY") ? 'active' : null}}"
+                    href="{{ route('ADMIN_INSERT_CATEGORY') }}">
                         Xem danh sách thể loại
                     </a>
                 </li>

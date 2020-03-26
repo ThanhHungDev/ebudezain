@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\VALIDATE_SAVE_CATEGORY;
 use App\Http\Requests\VALIDATE_SAVE_POST;
+use App\Http\Requests\VALIDATE_SAVE_STYLE;
+use App\Http\Requests\VALIDATE_SAVE_TYPE;
 use App\Model\CategoryModel;
 use App\Model\CategoryStyleModel;
 use App\Model\CategoryTypeModel;
 use App\Model\PostActiveStyleModel;
 use App\Model\PostModel;
-use App\Repositories\Contracts\PostRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -20,7 +22,7 @@ class AdminController extends Controller
         return view('admin.dashboard');
     }
 
-    public function insertPost(){
+    public function viewInsertPost(){
 
         $categories = (new CategoryModel())->all();
         $types      = (new CategoryTypeModel())->all();
@@ -165,7 +167,7 @@ class AdminController extends Controller
         return response()->json( $data, $status );
     }
 
-    public function savePost(VALIDATE_SAVE_POST $request){
+    public function insertPost(VALIDATE_SAVE_POST $request){
 
         $post                   = new PostModel();
         $post->title            = $request['title'];
@@ -268,6 +270,253 @@ class AdminController extends Controller
     public function deletePost($id = 0){
 
         (new PostModel())->find($id)->delete();
+
+        $status = 200;
+        $response = array( 'status' => $status, 'message' => 'success' );
+        return response()->json( $response );
+    }
+
+
+
+
+    //////Category ///////////////////////////////////////
+    public function viewInsertCategory(){
+
+        return view('admin.category');
+    }
+
+    public function insertCategory(VALIDATE_SAVE_CATEGORY $request){
+
+        $category                  = new CategoryModel();
+        $category->name            = $request['name'];
+        $category->slug            = $request['slug'];
+        $category->excerpt         = $request['excerpt'];
+        $category->thumbnail       = $request['thumbnail'];
+        $category->background      = $request['background'];
+        $category->description     = $request['description'];
+        $category->site_name       = $request['site_name'];
+        $category->image_seo       = $request['image_seo'];
+        $category->keyword_seo     = $request['keyword_seo'];
+        $category->description_seo = $request['description_seo'];
+
+        try{
+            $category->save();
+        }catch (\Exception $e){
+            return redirect()->back()->with('SAVE_ERROR', 'error save post '.$e->getMessage());
+        }
+
+        $request->session()->flash($this->SAVE_SUCCESS, true);
+        return redirect()->route('ADMIN_GET_EDIT_CATEGORY',  ['id' => $category->id]);
+    }
+    public function getEditCategory($id){
+
+        if(!is_numeric($id)){
+            $category = CategoryModel::first();
+        }else{
+            $category = CategoryModel::find($id);
+        }
+
+        if($category == null){
+            return redirect()->route('ADMIN_DASHBOARD');
+        }
+        return view('admin.category-edit', compact(['category']));
+    }
+
+    public function saveEditCategory(VALIDATE_SAVE_CATEGORY $request, $id){
+        
+        $category                  = (new CategoryModel())->find($id);
+        $category->name            = $request['name'];
+        $category->slug            = $request['slug'];
+        $category->excerpt         = $request['excerpt'];
+        $category->thumbnail       = $request['thumbnail'];
+        $category->background      = $request['background'];
+        $category->description     = $request['description'];
+        $category->site_name       = $request['site_name'];
+        $category->image_seo       = $request['image_seo'];
+        $category->keyword_seo     = $request['keyword_seo'];
+        $category->description_seo = $request['description_seo'];
+
+        try{
+            $category->save();
+        }catch (\Exception $e){
+            return redirect()->back()->with('SAVE_ERROR', 'error save category '.$e->getMessage());
+        }
+
+        $request->session()->flash($this->SAVE_SUCCESS, true);
+        return redirect()->route('ADMIN_GET_EDIT_POST',  ['id' => $category->id]);
+    }
+
+    public function categories(Request $request){
+        $limit      = 20;
+        $categories = (new CategoryModel())->paginate($limit);
+        return view('admin.category-list', compact(['categories']));
+    }
+    public function deleteCategory($id = 0){
+
+        (new CategoryModel())->find($id)->delete();
+
+        $status = 200;
+        $response = array( 'status' => $status, 'message' => 'success' );
+        return response()->json( $response );
+    }
+
+    //////type ///////////////////////////////////////
+    public function viewInsertType(){
+
+        $categories = (new CategoryModel())->all();
+        return view('admin.type', compact(['categories']));
+    }
+
+    public function insertType(VALIDATE_SAVE_TYPE $request){
+
+        $type                  = new CategoryTypeModel();
+        $type->name            = $request['name'];
+        $type->slug            = $request['slug'];
+        $type->excerpt         = $request['excerpt'];
+        $type->thumbnail       = $request['thumbnail'];
+        $type->background      = $request['background'];
+        $type->description     = $request['description'];
+        $type->site_name       = $request['site_name'];
+        $type->image_seo       = $request['image_seo'];
+        $type->keyword_seo     = $request['keyword_seo'];
+        $type->description_seo = $request['description_seo'];
+        $type->category_id     = $request['category_id'];
+
+        try{
+            $type->save();
+        }catch (\Exception $e){
+            return redirect()->back()->with('SAVE_ERROR', 'error save type '.$e->getMessage());
+        }
+
+        $request->session()->flash($this->SAVE_SUCCESS, true);
+        return redirect()->route('ADMIN_GET_EDIT_TYPE',  ['id' => $type->id]);
+    }
+    public function getEditType($id){
+
+        if(!is_numeric($id)){
+            $type = CategoryTypeModel::first();
+        }else{
+            $type = CategoryTypeModel::find($id);
+        }
+
+        if($type == null){
+            return redirect()->route('ADMIN_DASHBOARD');
+        }
+        return view('admin.type-edit', compact(['type']));
+    }
+    public function saveEditType(VALIDATE_SAVE_TYPE $request, $id){
+        
+        $type                  = (new CategoryTypeModel())->find($id);
+        $type->name            = $request['name'];
+        $type->slug            = $request['slug'];
+        $type->excerpt         = $request['excerpt'];
+        $type->thumbnail       = $request['thumbnail'];
+        $type->background      = $request['background'];
+        $type->description     = $request['description'];
+        $type->site_name       = $request['site_name'];
+        $type->image_seo       = $request['image_seo'];
+        $type->keyword_seo     = $request['keyword_seo'];
+        $type->description_seo = $request['description_seo'];
+        $type->category_id     = $request['category_id'];
+
+        try{
+            $type->save();
+        }catch (\Exception $e){
+            return redirect()->back()->with('SAVE_ERROR', 'error save category '.$e->getMessage());
+        }
+
+        $request->session()->flash($this->SAVE_SUCCESS, true);
+        return redirect()->route('ADMIN_GET_EDIT_TYPE',  ['id' => $type->id]);
+    }
+    public function types(Request $request){
+        $limit      = 20;
+        $types = (new CategoryTypeModel())->paginate($limit);
+        return view('admin.type-list', compact(['types']));
+    }
+    public function deleteType($id = 0){
+
+        (new CategoryTypeModel())->find($id)->delete();
+
+        $status = 200;
+        $response = array( 'status' => $status, 'message' => 'success' );
+        return response()->json( $response );
+    }
+
+    //////style ///////////////////////////////////////
+    public function viewInsertStyle(){
+
+        return view('admin.category');
+    }
+
+    public function insertStyle(VALIDATE_SAVE_STYLE $request){
+
+        $style                   = new CategoryStyleModel();
+        $style->name             = $request['name'];
+        $style->slug             = $request['slug'];
+        $style->excerpt          = $request['excerpt'];
+        $style->thumbnail        = $request['thumbnail'];
+        $style->background       = $request['background'];
+        $style->description      = $request['description'];
+        $style->site_name        = $request['site_name'];
+        $style->image_seo        = $request['image_seo'];
+        $style->keyword_seo      = $request['keyword_seo'];
+        $style->description_seo  = $request['description_seo'];
+        $style->category_type_id = $request['category_type_id'];
+
+        try{
+            $style->save();
+        }catch (\Exception $e){
+            return redirect()->back()->with('SAVE_ERROR', 'error save post '.$e->getMessage());
+        }
+
+        $request->session()->flash($this->SAVE_SUCCESS, true);
+        return redirect()->route('ADMIN_GET_EDIT_STYLE',  ['id' => $style->id]);
+    }
+    public function getEditStyle($id){
+
+        if(!is_numeric($id)){
+            $style = CategoryStyleModel::first();
+        }else{
+            $style = CategoryStyleModel::find($id);
+        }
+
+        if($style == null){
+            return redirect()->route('ADMIN_DASHBOARD');
+        }
+        return view('admin.style-edit', compact(['style']));
+    }
+    public function saveEditStyle(VALIDATE_SAVE_STYLE $request, $id){
+        
+        $style                   = (new CategoryTypeModel())->find($id);
+        $style->name             = $request['name'];
+        $style->slug             = $request['slug'];
+        $style->excerpt          = $request['excerpt'];
+        $style->thumbnail        = $request['thumbnail'];
+        $style->background       = $request['background'];
+        $style->description      = $request['description'];
+        $style->site_name        = $request['site_name'];
+        $style->image_seo        = $request['image_seo'];
+        $style->keyword_seo      = $request['keyword_seo'];
+        $style->description_seo  = $request['description_seo'];
+        $style->category_type_id = $request['category_type_id'];
+
+        try{
+            $style->save();
+        }catch (\Exception $e){
+            return redirect()->back()->with('SAVE_ERROR', 'error save style '.$e->getMessage());
+        }
+
+        $request->session()->flash($this->SAVE_SUCCESS, true);
+        return redirect()->route('ADMIN_GET_EDIT_STYLE',  ['id' => $style->id]);
+    }
+    public function styles(Request $request){
+        $limit  = 20;
+        $styles = (new CategoryStyleModel())->paginate($limit);
+        return view('admin.style-list', compact(['styles']));
+    }
+    public function deleteStyle($id = 0){
+
+        (new CategoryStyleModel())->find($id)->delete();
 
         $status = 200;
         $response = array( 'status' => $status, 'message' => 'success' );
