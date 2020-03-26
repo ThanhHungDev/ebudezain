@@ -323,7 +323,7 @@ class AdminController extends Controller
     }
 
     public function saveEditCategory(VALIDATE_SAVE_CATEGORY $request, $id){
-        
+    
         $category                  = (new CategoryModel())->find($id);
         $category->name            = $request['name'];
         $category->slug            = $request['slug'];
@@ -343,7 +343,7 @@ class AdminController extends Controller
         }
 
         $request->session()->flash($this->SAVE_SUCCESS, true);
-        return redirect()->route('ADMIN_GET_EDIT_POST',  ['id' => $category->id]);
+        return redirect()->route('ADMIN_GET_EDIT_CATEGORY',  ['id' => $category->id]);
     }
 
     public function categories(Request $request){

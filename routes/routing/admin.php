@@ -22,7 +22,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/category','AdminController@viewInsertCategory')->name('ADMIN_INSERT_CATEGORY');
         Route::post('/category','AdminController@insertCategory')->name('ADMIN_POST_INSERT_CATEGORY');
         Route::get('/category/{id}','AdminController@getEditCategory')->name('ADMIN_GET_EDIT_CATEGORY');
-        Route::post('/category/{id}','AdminController@saveEditPost')->name('ADMIN_POST_EDIT_CATEGORY');
+        Route::post('/category/{id}','AdminController@saveEditCategory')->name('ADMIN_POST_EDIT_CATEGORY');
         Route::get('/categories','AdminController@categories')->name('ADMIN_GET_LIST_CATEGORY');
         Route::delete('/category/{id?}','AdminController@deleteCategory')->name('ADMIN_DELETE_CATEGORY');
 

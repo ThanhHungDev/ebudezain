@@ -105,6 +105,8 @@
     }
     .admin-sidebar>ul {
         padding-top: 10px;
+        height: calc(100vh - 80px) ;
+        overflow-y: scroll;
     }
     .admin-sidebar ul li a.active, .admin-sidebar ul li ul li a:hover {
         background: rgba(255, 255, 255, 0.1);

@@ -36,8 +36,8 @@
                     </a>
                 </li>
                 <li>
-                    <a class="{{ Route::is("ADMIN_LIST_CATEGORY") ? 'active' : null}}"
-                    href="{{ route('ADMIN_INSERT_CATEGORY') }}">
+                    <a class="{{ Route::is("ADMIN_GET_LIST_CATEGORY") ? 'active' : null}}"
+                    href="{{ route('ADMIN_GET_LIST_CATEGORY') }}">
                         Xem danh sách thể loại
                     </a>
                 </li>
@@ -79,6 +79,17 @@
             <a class="block-session">User</a>
             <ul class="submenu">
                 <li><a href="/admin/user">thống kê user</a></li>
+                <li>
+                    <a class="{{ Route::is("ADMIN_INSERT_POST") ? 'activec' : null}}"
+                        href="{{ route('ADMIN_INSERT_POST') }}">
+                        Thêm kiểu dáng
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        Xem danh sách kiểu dáng
+                    </a>
+                </li>
             </ul>
         </li>
     </ul>

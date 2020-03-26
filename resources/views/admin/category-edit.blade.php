@@ -34,7 +34,7 @@
                     @endif
                 </div>
             </div>
-            <form class="row js-validate-form" action="{{ Route('ADMIN_category_EDIT_CATEGORY', ['id', $category->id]) }}" method="POST">
+            <form class="row js-validate-form" action="{{ Route('ADMIN_POST_EDIT_CATEGORY', ['id' => $category->id]) }}" method="POST">
                 {!! csrf_field() !!}
                 <div class="col-8 col-lg-12">
                     <div class="row block-content">
@@ -60,7 +60,11 @@
                     <div class="row block-content">
                         <div class="col-12 bg-white shadows-1 px-4 py-4" id="js-check-slug">
                             <h2 class="title">background</h2>
-                            <input name="background" type="text" value="{{ old('background', $category->background) }}" />
+                            <div class="position-relative">
+                                <input name="background" type="text" value="{{ old('background', $category->background) }}" />
+                                <button class="btn bg-cyan bd-cyan text-white btn-input-append" 
+                                type="button" onclick="selectImageInputWithCKFinder(this)">chọn ảnh</button>
+                            </div>
                         </div>
                     </div>
                     <div class="row block-content">
@@ -132,6 +136,19 @@
 @endsection
 
 @section('js_custom_page')
+@if(old('background', $category->background))
+<script>
+var value_background = "{{ old('background', $category->background) }}";
+var doms_background  = document.getElementsByName( 'background' );
+
+if(doms_background.length){
+
+    var dom_background = doms_background[0];
+    showImageToInput(value_background, dom_background);
+}
+</script>
+@endif
+
 @if(old('image_seo', $category->image_seo))
 <script>
 var value_image_seo = "{{ old('image_seo', $category->image_seo) }}";
@@ -144,6 +161,7 @@ if(doms_image_seo.length){
 }
 </script>
 @endif
+
 @if(old('thumbnail', $category->thumbnail))
 <script>
 var value_thumbnail = "{{ old('thumbnail', $category->thumbnail) }}";

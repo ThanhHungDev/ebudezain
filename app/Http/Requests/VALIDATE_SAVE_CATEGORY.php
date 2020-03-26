@@ -13,13 +13,13 @@ class VALIDATE_SAVE_CATEGORY extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     public function rules()
     {
         return [
-            'name'            => 'required|max:255',
+            'name'            => 'required|max:255ß',
             'slug'            => 'required|max:255',
             'excerpt'         => 'required|max:255',
             'thumbnail'       => 'required|max:255',

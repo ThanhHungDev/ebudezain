@@ -127,7 +127,7 @@ function showImageToInput( imageSrc, elementId ){
         img_finder.src       = imageSrc;
         img_finder.className = "img-input-append"
     var wrapperInput = elementId.parentElement;
-    var images = document.getElementsByClassName('img-input-append');
+    var images = wrapperInput.getElementsByClassName('img-input-append');
     for(var index = 0; index < images.length; index ++ ){
         images[index].remove();
     }
