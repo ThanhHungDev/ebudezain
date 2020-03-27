@@ -16,20 +16,20 @@
                     </div>
                     <div class="col-8 col-lg-7 col-sm-12">
                         <h2 class="title-section">Thông Tin Cơ Bản</h2>
-                        <div class="BaseInformation">
-                            <div class="WrapperItemInfor">
+                        <div class="base-information">
+                            <div class="wrapper-item-infor">
                                 <p class="title">Tên Đầy Đủ</p>
                                 <p>Trương Thanh Hùng</p>
                             </div>
-                            <div class="WrapperItemInfor">
+                            <div class="wrapper-item-infor">
                                 <p class="title">Địa Chỉ</p>
                                 <p>0674, lộc hòa, bình giã, Châu Đức, Bà Rịa - Vũng Tàu</p>
                             </div>
-                            <div class="WrapperItemInfor">
+                            <div class="wrapper-item-infor">
                                 <p class="title">Số Điện Thoại</p>
                                 <p>079.7581.480</p>
                             </div>
-                            <div class="WrapperItemInfor">
+                            <div class="wrapper-item-infor">
                                 <p class="title">email</p>
                                 <p>thanhhung.tud@gmail.com</p>
                             </div>
@@ -40,7 +40,7 @@
         </div>
         <div class="py-5 py-sm-0 px-5 px-sm-0">
             <div class="row bg-white shadows-1 shadows-0-mobile">
-                <h2 class="TitleTopic">Kỹ Năng</h2>
+                <h2 class="title-topic">Kỹ Năng</h2>
                 <div class="col-12 py-3">
                     <div class="row">
                         <div class="col-6 col-sm-12">
@@ -76,44 +76,44 @@
             </div>
         </div>
         <div class="pb-5 py-sm-0 row">
-            <h2 class="TitleTopic py-3">Ngôn Ngữ</h2>
-            <div class="WrapperLanguageDevelopper clear">
-                <div class="BlockLanguage">
-                    <div class="IconTitleBlock">
-                        <span class="JsComponent icon">
+            <h2 class="title-topic py-3">Ngôn Ngữ</h2>
+            <div class="wrapper-language-developper clear">
+                <div class="block-language">
+                    <div class="icon-title-block">
+                        <span class="js-component icon">
                             {% include "genneral/svg/node-js.svg" %}
                         </span>
                     </div>
                     <h6 class="text-center">Express.js, Reactjs, Jquery</h6>
-                    <h4 class="TitleBlockLang">JAVASCRIPT</h4>
-                    <p class="ContentLang">
+                    <h4 class="title-block-language">JAVASCRIPT</h4>
+                    <p class="content-language">
                         Ứng dụng đang dùng được viết trên nền nodejs trên công nghệ reactjs và nodejs
                         express socket
                     </p>
                 </div>
-                <div class="BlockLanguage Middle">
-                    <div class="IconTitleBlock">
-                        <span class="PhpComponent icon">
+                <div class="block-language middle">
+                    <div class="icon-title-block">
+                        <span class="php-component icon">
                             {% include "genneral/svg/php.svg" %}
                         </span>
                     </div>
                     <h6 class="text-center">PHP Core, Laravel,...</h6>
-                    <h4 class="TitleBlockLang">PHP</h4>
-                    <p class="ContentLang">
+                    <h4 class="title-block-language">PHP</h4>
+                    <p class="content-language">
                         Xây dựng các ứng dụng web động viết trên nền LAMP, LEMP. Có khả năng làm việc
                         ở tất cả các giai đoạn của quy trình phát triển phần mềm từ phân tích hệ thống đến xây dựng
                         website font-end lẫn back-end
                     </p>
                 </div>
-                <div class="BlockLanguage">
-                    <div class="IconTitleBlock">
-                        <span class="JavaComponent icon">
+                <div class="block-language">
+                    <div class="icon-title-block">
+                        <span class="java-component icon">
                             {% include "genneral/svg/java.svg" %}
                         </span>
                     </div>
                     <h6 class="text-center">Servlet, Java core, C#, Redit</h6>
-                    <h4 class="TitleBlockLang">JAVA &amp; C#</h4>
-                    <p class="ContentLang">
+                    <h4 class="title-block-language">JAVA &amp; C#</h4>
+                    <p class="content-language">
                         Sử dụng Java, C#,... để built các web chuyên biệt hơn hoặc có yêu cầu phù hợp
                         với project cụ thể
                     </p>
@@ -123,11 +123,11 @@
     </div>
 </div>
 <div class="line-height-0">
-    <h2 class="TitleTopic">Học Vấn</h2>
-    <div class="EducationDeveloper position-relative">
-        <div class="WrapperContentEducation"><img class="avatar_dh_saigon vertical-align-middle"
+    <h2 class="title-topic">Học Vấn</h2>
+    <div class="education-developer position-relative">
+        <div class="wrapper-content-education"><img class="avatar_dh_saigon vertical-align-middle"
                 src="{{ base_url() ~ '/images/background/avatar-dh-saigon.jpg' }}" alt="">
-            <div class="DescriptionContentEdu vertical-align-middle">
+            <div class="description-content-education vertical-align-middle">
                 <h3 class="title">Đại Học Sài Gòn</h3>
                 <q class="description">
                     Đại Học Sài Gòn là 1 chuỗi hành trình học
@@ -139,3 +139,9 @@
     </div>
 </div>
 {% endblock %}
+
+<script> 
+	$.get("http://ip-api.com/json", function(response) {
+		console.log(response);
+    }, "json");
+</script> 

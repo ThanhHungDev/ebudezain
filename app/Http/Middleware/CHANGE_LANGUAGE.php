@@ -19,7 +19,7 @@ class CHANGE_LANGUAGE
     public function handle($request, Closure $next)
     {
         $CF_SESSION_LANGUAGE = config('system.SESSION_LANGUAGE');
-        $language            = Session::get($CF_SESSION_LANGUAGE, config('app.locale'));
+        $language            = $request->cookie($CF_SESSION_LANGUAGE, config('app.locale'));
         // Lấy dữ liệu lưu trong Session name::website_language, 
         // không có thì trả về default lấy trong config
         //config(['app.locale' => $language]);
@@ -27,6 +27,5 @@ class CHANGE_LANGUAGE
         // Chuyển ứng dụng sang ngôn ngữ được chọn
 
         return $next($request);
-
     }
 }
