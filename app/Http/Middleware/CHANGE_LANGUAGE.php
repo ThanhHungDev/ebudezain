@@ -18,11 +18,12 @@ class CHANGE_LANGUAGE
      */
     public function handle($request, Closure $next)
     {
-        $DF_NAME_LANGUAGE = 'website_language';
-        $language = \Session::get($DF_NAME_LANGUAGE, config('app.locale'));
-        // Lấy dữ liệu lưu trong Session name::website_language, không có thì trả về default lấy trong config
+        $CF_SESSION_LANGUAGE = config('system.SESSION_LANGUAGE');
+        $language            = Session::get($CF_SESSION_LANGUAGE, config('app.locale'));
+        // Lấy dữ liệu lưu trong Session name::website_language, 
+        // không có thì trả về default lấy trong config
         //config(['app.locale' => $language]);
-        App::setLocale($language);
+        App:: setLocale($language);
         // Chuyển ứng dụng sang ngôn ngữ được chọn
 
         return $next($request);
