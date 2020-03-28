@@ -1,6 +1,6 @@
 <div class="admin-sidebar bg-unique-color-dark">
     <a class="logo-sidebar line-height-0" href="/admin/">
-        <img src="/images/logo.png" alt="Hospital">
+        <img src="/images/logo.png" alt="admin">
     </a>
     <ul>
         <li>

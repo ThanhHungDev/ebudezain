@@ -21,7 +21,7 @@
                         </a>
                         <ul class="submenu">
                             @if(Auth::user())
-                            <li><a href="#">{{ Auth::user()->email }}</a></li>
+                            <li><a href="javascript:void(0)">{{ Auth::user()->email }}</a></li>
                             @endif
                             <li><a href="{{ Route('ADMIN_LOGOUT') }}">logout</a></li>
                         </ul>
