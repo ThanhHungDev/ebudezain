@@ -47,13 +47,14 @@
             <a class="block-session"> Phân Loại </a>
             <ul class="submenu">
                 <li>
-                    <a class="{{ Route::is("ADMIN_INSERT_POST") ? 'activec' : null}}"
-                        href="{{ route('ADMIN_INSERT_POST') }}">
+                    <a class="{{ Route::is("ADMIN_INSERT_TYPE") ? 'activec' : null}}"
+                        href="{{ route('ADMIN_INSERT_TYPE') }}">
                         Thêm phân loại
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a class="{{ Route::is("ADMIN_GET_LIST_TYPE") ? 'active' : null}}"
+                    href="{{ route('ADMIN_GET_LIST_TYPE') }}">
                         Xem danh sách phân loại
                     </a>
                 </li>
@@ -63,13 +64,14 @@
             <a class="block-session"> Kiểu dáng </a>
             <ul class="submenu">
                 <li>
-                    <a class="{{ Route::is("ADMIN_INSERT_POST") ? 'activec' : null}}"
-                        href="{{ route('ADMIN_INSERT_POST') }}">
+                    <a class="{{ Route::is("ADMIN_INSERT_STYLE") ? 'active' : null}}"
+                        href="{{ route('ADMIN_INSERT_STYLE') }}">
                         Thêm kiểu dáng
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a class="{{ Route::is("ADMIN_GET_LIST_STYLE") ? 'active' : null}}"
+                    href="{{ route('ADMIN_GET_LIST_STYLE') }}">
                         Xem danh sách kiểu dáng
                     </a>
                 </li>

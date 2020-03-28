@@ -211,11 +211,11 @@ function isExistSlug( elementId ){
         url: ACTION_CHECK_SLUG + "/" + slug,
         dataType:"JSON",
         success: function(response){
-            showResultSlugExisted(response.data);
+            showResultSlugExisted(response.data, slug);
         }
     });
 }
-function showResultSlugExisted(result){
+function showResultSlugExisted(result, slug){
     let DF_MESSAGE_SLUG_EXISTED     = "slug đã tồn tại";
     let DF_MESSAGE_SLUG_NOT_EXISTED = "slug chưa tồn tại";
 
@@ -227,7 +227,14 @@ function showResultSlugExisted(result){
         parag.className   = result ? DF_CLASS_RESULT + DF_ERROR_RESULT : DF_CLASS_RESULT + DF_SUCCESS_RESULT;
         parag.textContent = result ? DF_MESSAGE_SLUG_EXISTED : DF_MESSAGE_SLUG_NOT_EXISTED;
     document.getElementById("js-check-slug").appendChild( parag );
-    if( !result ) {
+    if( !result || document.getElementsByClassName('js-form-edit').length) {
+        var oldSlug = document.getElementsByName('old-slug');
+        if(oldSlug.length){
+            var valueOldSlug = oldSlug[0].value;
+            if(valueOldSlug != slug){
+                return false;
+            }
+        }
         $("button[type=submit]").attr('disabled', false );
     }
 }

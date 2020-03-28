@@ -34,7 +34,7 @@
                     @endif
                 </div>
             </div>
-            <form class="row js-validate-form" action="{{ Route('ADMIN_POST_EDIT_CATEGORY', ['id' => $category->id]) }}" method="POST">
+            <form class="row js-form-edit js-validate-form" action="{{ Route('ADMIN_POST_EDIT_CATEGORY', ['id' => $category->id]) }}" method="POST">
                 {!! csrf_field() !!}
                 <div class="col-8 col-lg-12">
                     <div class="row block-content">

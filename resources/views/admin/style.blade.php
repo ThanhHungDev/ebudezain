@@ -8,7 +8,7 @@
     <div class="admin-main-content">
         <div class="page-title">
             <div class="clear">
-                <h2 class="headding float-left"> thêm thể loại </h2>
+                <h2 class="headding float-left"> thêm kiểu dáng </h2>
             </div>
         </div>
         <div class="admin-wrapper-content-field">
@@ -33,7 +33,7 @@
                 <div class="col-8 col-lg-12">
                     <div class="row block-content">
                         <div class="col-12 bg-white shadows-1 px-4 py-4" id="js-check-slug">
-                            <h2 class="title">title post</h2>
+                            <h2 class="title">tên kiểu dáng</h2>
                             <input name="name" type="text" value="{{ old('name') }}" onblur="isExistSlug('js-check-slug')" />
                             <input name="slug" type="hidden" value="{{ old('slug') }}" />
                         </div>
@@ -54,7 +54,11 @@
                     <div class="row block-content">
                         <div class="col-12 bg-white shadows-1 px-4 py-4" id="js-check-slug">
                             <h2 class="title">background</h2>
-                            <input name="background" type="text" value="{{ old('background') }}" />
+                            <div class="position-relative">
+                                <input name="background" type="text" value="{{ old('background') }}" />
+                                <button class="btn bg-cyan bd-cyan text-white btn-input-append" 
+                                type="button" onclick="selectImageInputWithCKFinder(this)">chọn ảnh</button>
+                            </div>
                         </div>
                     </div>
                     <div class="row block-content">
@@ -125,7 +129,8 @@
                                 onchange="changeCategoryType('js-category', 'js-category-style', this)">
                                     <option value="">chọn loại bài đăng</option>
                                     @foreach($types as $type)
-                                    <option value="{{ $type->id }}">{{ $type->name }}</option>
+                                    <option @if(old('category_type_id') == $type->id) {{ 'selected' }} @endif
+                                    value="{{ $type->id }}">{{ $type->name }}</option>
                                     @endforeach
                                 </select>
                                 @endif
@@ -154,4 +159,36 @@
         </div>
     </div>
 </div>
+@endsection
+@section('js_custom_page')
+@if(old('background'))
+<script>
+var value_background = "{{ old('background') }}";
+var doms_background  = document.getElementsByName( 'background' );
+
+if(doms_background.length){
+
+    var dom_background = doms_background[0];
+    showImageToInput(value_background, dom_background);
+}
+</script>
+@endif
+@if(old('image_seo'))
+<script>
+var value_image_seo = "{{ old('image_seo') }}";
+var doms_image_seo  = document.getElementsByName( 'image_seo' );
+
+if(doms_image_seo.length){
+
+    var dom_image_seo = doms_image_seo[0];
+    showImageToInput(value_image_seo, dom_image_seo);
+}
+</script>
+@endif
+@if(old('thumbnail'))
+<script>
+var value_thumbnail = "{{ old('thumbnail') }}";
+showImageToBrowser(value_thumbnail, 'thumbnail-topic');
+</script>
+@endif
 @endsection

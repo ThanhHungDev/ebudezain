@@ -402,7 +402,8 @@ class AdminController extends Controller
         if($type == null){
             return redirect()->route('ADMIN_DASHBOARD');
         }
-        return view('admin.type-edit', compact(['type']));
+        $categories = (new CategoryModel())->all();
+        return view('admin.type-edit', compact(['type', 'categories']));
     }
     public function saveEditType(VALIDATE_SAVE_TYPE $request, $id){
         
@@ -445,7 +446,9 @@ class AdminController extends Controller
     //////style ///////////////////////////////////////
     public function viewInsertStyle(){
 
-        return view('admin.category');
+        $categories = (new CategoryModel())->all();
+        $types      = (new CategoryTypeModel())->all();
+        return view('admin.style', compact(['categories', 'types']));
     }
 
     public function insertStyle(VALIDATE_SAVE_STYLE $request){
@@ -483,11 +486,13 @@ class AdminController extends Controller
         if($style == null){
             return redirect()->route('ADMIN_DASHBOARD');
         }
-        return view('admin.style-edit', compact(['style']));
+        $categories = (new CategoryModel())->all();
+        $types      = (new CategoryStyleModel())->all();
+        return view('admin.style-edit', compact(['style', 'categories', 'types']));
     }
     public function saveEditStyle(VALIDATE_SAVE_STYLE $request, $id){
         
-        $style                   = (new CategoryTypeModel())->find($id);
+        $style                   = (new CategoryStyleModel())->find($id);
         $style->name             = $request['name'];
         $style->slug             = $request['slug'];
         $style->excerpt          = $request['excerpt'];

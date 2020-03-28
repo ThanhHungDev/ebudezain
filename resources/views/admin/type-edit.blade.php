@@ -34,8 +34,9 @@
                     @endif
                 </div>
             </div>
-            <form class="row js-validate-form" action="{{ Route('ADMIN_type_EDIT_TYPE', ['id', $type->id]) }}" method="type">
+            <form class="row js-form-edit js-validate-form" action="{{ Route('ADMIN_POST_EDIT_TYPE', ['id' => $type->id]) }}" method="post">
                 {!! csrf_field() !!}
+                <input type="hidden" name="old-slug" value="{{ $type->slug }}">
                 <div class="col-8 col-lg-12">
                     <div class="row block-content">
                         <div class="col-12 bg-white shadows-1 px-4 py-4" id="js-check-slug">
@@ -60,7 +61,11 @@
                     <div class="row block-content">
                         <div class="col-12 bg-white shadows-1 px-4 py-4" id="js-check-slug">
                             <h2 class="title">background</h2>
-                            <input name="background" type="text" value="{{ old('background', $type->background) }}" />
+                            <div class="position-relative">
+                                <input name="background" type="text" value="{{ old('background', $type->background) }}" />
+                                <button class="btn bg-cyan bd-cyan text-white btn-input-append" 
+                                type="button" onclick="selectImageInputWithCKFinder(this)">chọn ảnh</button>
+                            </div>
                         </div>
                     </div>
                     <div class="row block-content">
@@ -105,7 +110,23 @@
                             </section>
                         </div>
                     </div>
-                    
+                    <div class="row block-content">
+                        <div class="col-12 bg-white shadows-1 px-4 py-4">
+                            <section class="pb-4">
+                                <h2 class="title text-center">chọn category</h2>
+                                @if($categories)
+                                <select name="category_id" class="js-multi-select js-category" 
+                                onchange="changeCategory('js-category-type', 'js-category-style', this)">
+                                    <option value="">chọn thể loại</option>
+                                    @foreach($categories as $category)
+                                    <option @if(old('category_id', $type->category_id) == $category->id) {{ 'selected' }} @endif
+                                    value="{{ $category->id }}">{{ $category->name }}</option>
+                                    @endforeach
+                                </select>
+                                @endif
+                            </section>
+                        </div>
+                    </div>
 
                     <div class="row block-content">
                         <div class="col-12 bg-white shadows-1 px-4 py-4">
@@ -132,6 +153,18 @@
 @endsection
 
 @section('js_custom_page')
+@if(old('background', $type->background))
+<script>
+var value_background = "{{ old('background', $type->background) }}";
+var doms_background  = document.getElementsByName( 'background' );
+
+if(doms_background.length){
+
+    var dom_background = doms_background[0];
+    showImageToInput(value_background, dom_background);
+}
+</script>
+@endif
 @if(old('image_seo', $type->image_seo))
 <script>
 var value_image_seo = "{{ old('image_seo', $type->image_seo) }}";

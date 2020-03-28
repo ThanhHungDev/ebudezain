@@ -106,7 +106,6 @@
     .admin-sidebar>ul {
         padding-top: 10px;
         height: calc(100vh - 80px) ;
-        overflow-y: scroll;
     }
     .admin-sidebar ul li a.active, .admin-sidebar ul li ul li a:hover {
         background: rgba(255, 255, 255, 0.1);
@@ -243,7 +242,10 @@
     .wrapper-main-page .select2-container--default .select2-selection--single{
         min-height: 46px;
         border-radius: 0;
-        border-color: #f2f2f2
+        border-color: #f2f2f2;
+    }
+    .wrapper-main-page .select2-container{
+        width : 100%!important;
     }
     .wrapper-main-page .select2-container--default .select2-selection--multiple{
         border-radius: 0;

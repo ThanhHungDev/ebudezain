@@ -34,7 +34,7 @@
                     @endif
                 </div>
             </div>
-            <form class="row js-validate-form" action="{{ Route('ADMIN_POST_EDIT_STYLE', ['id', $style->id]) }}" method="POST">
+            <form class="row js-form-edit js-validate-form" action="{{ Route('ADMIN_POST_EDIT_STYLE', ['id' => $style->id]) }}" method="POST">
                 {!! csrf_field() !!}
                 <div class="col-8 col-lg-12">
                     <div class="row block-content">
@@ -170,6 +170,18 @@
 @endsection
 
 @section('js_custom_page')
+@if(old('background', $style->background))
+<script>
+var value_background = "{{ old('background', $style->background) }}";
+var doms_background  = document.getElementsByName( 'background' );
+
+if(doms_background.length){
+
+    var dom_background = doms_background[0];
+    showImageToInput(value_background, dom_background);
+}
+</script>
+@endif
 @if(old('image_seo', $style->image_seo))
 <script>
 var value_image_seo = "{{ old('image_seo', $style->image_seo) }}";

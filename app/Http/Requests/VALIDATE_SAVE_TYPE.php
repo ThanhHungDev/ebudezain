@@ -13,7 +13,7 @@ class VALIDATE_SAVE_TYPE extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     public function rules()

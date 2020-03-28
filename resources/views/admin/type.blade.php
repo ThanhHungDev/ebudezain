@@ -33,7 +33,7 @@
                 <div class="col-8 col-lg-12">
                     <div class="row block-content">
                         <div class="col-12 bg-white shadows-1 px-4 py-4" id="js-check-slug">
-                            <h2 class="title">title post</h2>
+                            <h2 class="title">tên phân loại </h2>
                             <input name="name" type="text" value="{{ old('name') }}" onblur="isExistSlug('js-check-slug')" />
                             <input name="slug" type="hidden" value="{{ old('slug') }}" />
                         </div>
@@ -54,7 +54,11 @@
                     <div class="row block-content">
                         <div class="col-12 bg-white shadows-1 px-4 py-4" id="js-check-slug">
                             <h2 class="title">background</h2>
-                            <input name="background" type="text" value="{{ old('background') }}" />
+                            <div class="position-relative">
+                                <input name="background" type="text" value="{{ old('background') }}" />
+                                <button class="btn bg-cyan bd-cyan text-white btn-input-append" 
+                                type="button" onclick="selectImageInputWithCKFinder(this)">chọn ảnh</button>
+                            </div>
                         </div>
                     </div>
                     <div class="row block-content">

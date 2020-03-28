@@ -21,26 +21,26 @@
                                     <th>name</th>
                                     <th>keyword</th>
                                     <th>description</th>
-                                    <th>#remove#</th>
+                                    {{-- <th>#remove#</th> --}}
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach( $styles as $style)
                                 <tr>
                                     <td>
-                                        <a href="{{ Route("ADMIN_GET_EDIT_POST", ['id' =>  $style->id]) }}">
+                                        <a href="{{ Route("ADMIN_GET_EDIT_STYLE", ['id' =>  $style->id]) }}">
                                             {{ limitText($style->name, 30) }}
                                         </a>
                                     </td>
                                     <td>{{ limitText($style->keyword_seo, 30) }}</td>
                                     <td>{{ limitText($style->description_seo, 30) }}</td>
-                                    <td>
+                                    {{-- <td>
                                         <button type="button"
                                         onclick="deleteSlug('{{ $style->id }}', this)"
                                         class="bg-transparent btn-remove-row">
                                             @include ("genneral/svg/remove")
                                         </button>
-                                    </td>
+                                    </td> --}}
                                 </tr>
                                 @endforeach
                             </tbody>

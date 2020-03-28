@@ -21,7 +21,7 @@
                                     <th>name</th>
                                     <th>keyword</th>
                                     <th>description</th>
-                                    <th>#remove#</th>
+                                    {{-- <th>#remove#</th> --}}
                                 </tr>
                             </thead>
                             <tbody>
@@ -34,13 +34,13 @@
                                     </td>
                                     <td>{{ limitText($category->keyword_seo, 30) }}</td>
                                     <td>{{ limitText($category->description_seo, 30) }}</td>
-                                    <td>
+                                    {{-- <td>
                                         <button type="button"
                                         onclick="deleteSlug('{{ $category->id }}', this)"
                                         class="bg-transparent btn-remove-row">
                                             @include ("genneral/svg/remove")
                                         </button>
-                                    </td>
+                                    </td> --}}
                                 </tr>
                                 @endforeach
                             </tbody>
