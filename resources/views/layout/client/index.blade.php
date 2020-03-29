@@ -1,4 +1,3 @@
-{% set config = get_config() %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -95,9 +94,9 @@
             {% include 'layout/client/partial/footer.twig' %}
         </div>
     </div>
-    {% include "layout/client/partial/modal.login.twig" %}
-    {% include "layout/client/partial/modal.register.twig" %} 
-    {% include "layout/client/partial/modal.error-connect.twig" %} 
+    {% include "layout/client/partial/modal-login.twig" %}
+    {% include "layout/client/partial/modal-register.twig" %} 
+    {% include "layout/client/partial/modal-error-connect.twig" %} 
     <input type="text" class="d-none" id="js-channel-name" value="" />
     <input type="text" class="d-none" id="js-id-user" value="" />
     <input type="text" class="d-none" id="js-access-token" value=""/> 

@@ -1,6 +1,6 @@
 <?php
 
-Route::get('/',function(){return "hùng đẹp trai home page client";})->name('CLIENT_HOME');
+
 Route::group(['prefix' => 'admin'], function () {
 
     Route::get('/login','LoginController@getLogin')->name('ADMIN_LOGIN');

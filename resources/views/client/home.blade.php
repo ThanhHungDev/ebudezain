@@ -1,10 +1,10 @@
-{% extends "layout/client/intro.twig" %}
-{% block main %}
+@extends('layout.client.intro')
+@section('content')
 <div class="BlackImage line-height-0">
-    {% include "genneral/svg/hero-triangles.svg" %}
+    @include ("genneral.svg.hero-triangles")
     <h1>Trương Thanh Hùng <span>Web developer</span></h1>
-    <img class="mobile" src="{{ base_url() ~ '/images/background/bg-developer.jpg' }}" alt="HUNGTT">
-    <img class="pc" src="{{ base_url() ~ '/images/background/bg-developer-pc.jpg' }}" alt="HUNGTT-PC">
+    <img class="mobile" src="{{ asset('images/background/bg-developer.jpg') }}" alt="HUNGTT">
+    <img class="pc " src="{{ asset('images/background/bg-developer-pc.jpg') }}" alt="HUNGTT-PC">
 </div>
 <div class="bg-grey-x">
     <div class="container">
@@ -12,7 +12,7 @@
             <div class="col-12">
                 <div class="row py-3">
                     <div class="col-4 col-lg-5 col-sm-12 AvatarDeveloper">
-                        <img src="{{ base_url() ~ '/images/background/avatar-developer.jpg' }}" alt="avatar"/>
+                        <img src="{{ asset('images/background/avatar-developer.jpg') }}" alt="avatar"/>
                     </div>
                     <div class="col-8 col-lg-7 col-sm-12">
                         <h2 class="title-section">Thông Tin Cơ Bản</h2>
@@ -81,7 +81,7 @@
                 <div class="block-language">
                     <div class="icon-title-block">
                         <span class="js-component icon">
-                            {% include "genneral/svg/node-js.svg" %}
+                            @include ("genneral.svg.node-js")
                         </span>
                     </div>
                     <h6 class="text-center">Express.js, Reactjs, Jquery</h6>
@@ -94,7 +94,7 @@
                 <div class="block-language middle">
                     <div class="icon-title-block">
                         <span class="php-component icon">
-                            {% include "genneral/svg/php.svg" %}
+                            @include ("genneral.svg.php")
                         </span>
                     </div>
                     <h6 class="text-center">PHP Core, Laravel,...</h6>
@@ -108,7 +108,7 @@
                 <div class="block-language">
                     <div class="icon-title-block">
                         <span class="java-component icon">
-                            {% include "genneral/svg/java.svg" %}
+                            @include ("genneral.svg.java")
                         </span>
                     </div>
                     <h6 class="text-center">Servlet, Java core, C#, Redit</h6>
@@ -126,7 +126,7 @@
     <h2 class="title-topic">Học Vấn</h2>
     <div class="education-developer position-relative">
         <div class="wrapper-content-education"><img class="avatar_dh_saigon vertical-align-middle"
-                src="{{ base_url() ~ '/images/background/avatar-dh-saigon.jpg' }}" alt="">
+                src="{{ asset('images/background/avatar-dh-saigon.jpg') }}" alt="">
             <div class="description-content-education vertical-align-middle">
                 <h3 class="title">Đại Học Sài Gòn</h3>
                 <q class="description">
@@ -138,10 +138,9 @@
         </div>
     </div>
 </div>
-{% endblock %}
-
+@endsection
 <script> 
 	$.get("http://ip-api.com/json", function(response) {
 		console.log(response);
     }, "json");
-</script> 
+</script>

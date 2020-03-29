@@ -17,4 +17,11 @@ class HomeController extends Controller
         $cookie = Cookie::make($CF_COOKIE_LANGUAGE, $language, $time);
         return redirect()->back()->withCookie($cookie);
     }
+
+    public function home(){
+        return view('client.home');
+    }
+    public function cate($slug = null){
+        return 1;
+    }
 }

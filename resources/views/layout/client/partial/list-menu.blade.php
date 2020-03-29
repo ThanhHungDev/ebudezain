@@ -1,63 +1,61 @@
 <div class="list-wrapper float-right">
     <div class="social-wrapper clear mobile">
         <a class="soccial-link" href="https://www.facebook.com/HungSmurf">
-            {% include "genneral/svg/facebook-square.svg" %}
+            @include ("genneral.svg.facebook-square")
         </a>
         <a class="soccial-link" href="https://www.facebook.com/HungSmurf" >
-            {% include "genneral/svg/youtube.svg" %}
+            @include ("genneral.svg.youtube")
         </a>
         <a class="soccial-link" href="https://www.facebook.com/HungSmurf" >
-            {% include "genneral/svg/instagram.svg" %}
+            @include ("genneral.svg.instagram")
         </a>
         <label for="toggle-menu" class="btn-toggle-close">
-            {% include "genneral/svg/windows-close.svg" %}
+            @include ("genneral.svg.windows-close")
         </label>
     </div>
     <ul class="menu clear">
-        <li class="{{ is_routers(
-                        full_url_for('GET_TOPIC' , {slug : ''}), 
-                        ['javascript', 'jquery', 'react', 'nodejs']
-                    ) }}">
+        <li class=" {{ Route::is('CLIENT_GET_CATE' , ['slug' => 'javascript']) ? 'active' : null }}
+                    {{ Route::is('CLIENT_GET_CATE' , ['slug' => 'jquery']) ? 'active' : null }}
+                    {{ Route::is('CLIENT_GET_CATE' , ['slug' => 'react']) ? 'active' : null }}
+                    {{ Route::is('CLIENT_GET_CATE' , ['slug' => 'nodejs']) ? 'active' : null }}">
             <a >
-                Javascript <span class="icon-menu-angle-down">{% include "genneral/svg/angle-down.svg" %} </span>
+                Javascript <span class="icon-menu-angle-down">@include ("genneral.svg.angle-down") </span>
             </a>
             <ul class="submenu">
-                <li><a href="{{ full_url_for('GET_TOPIC', {slug : 'javascript'}) }}">Javascript core</a></li>
-                <li><a href="{{ full_url_for('GET_TOPIC', {slug : 'jquery'}) }}">Jquery</a></li>
-                <li><a href="{{ full_url_for('GET_TOPIC', {slug : 'react'}) }}">React</a></li>
-                <li><a href="{{ full_url_for('GET_TOPIC', {slug : 'nodejs'}) }}">Nodejs</a></li>
+                <li><a href="{{ Route('CLIENT_GET_CATE', ['slug' => 'javascript']) }}">Javascript core</a></li>
+                <li><a href="{{ Route('CLIENT_GET_CATE', ['slug' => 'jquery']) }}">Jquery</a></li>
+                <li><a href="{{ Route('CLIENT_GET_CATE', ['slug' => 'react']) }}">React</a></li>
+                <li><a href="{{ Route('CLIENT_GET_CATE', ['slug' => 'nodejs']) }}">Nodejs</a></li>
             </ul>
         </li>
-        <li class="{{ is_routers(
-                        full_url_for('GET_TOPIC' , {slug : ''}), 
-                        ['php-core', 'php-slim', 'php-laravel', 'php-high-level']
-                    ) }}">
+        <li class="{{ Route::is('CLIENT_GET_CATE' , ['slug' => 'php-core']) ? 'active' : null }}
+                    {{ Route::is('CLIENT_GET_CATE' , ['slug' => 'php-slim']) ? 'active' : null }}
+                    {{ Route::is('CLIENT_GET_CATE' , ['slug' => 'php-laravel']) ? 'active' : null }}
+                    {{ Route::is('CLIENT_GET_CATE' , ['slug' => 'php-high-level']) ? 'active' : null }}">
             <a>
-                PHP <span class="icon-menu-angle-down">{% include "genneral/svg/angle-down.svg" %} </span>
+                PHP <span class="icon-menu-angle-down">@include ("genneral.svg.angle-down") </span>
             </a>
             <ul class="submenu">
-                <li><a href="{{ full_url_for('GET_TOPIC', {slug : 'php-core'}) }}">PHP CORE</a></li>
-                <li><a href="{{ full_url_for('GET_TOPIC', {slug : 'php-slim'}) }}"> Slim Framework</a></li>
-                <li><a href="{{ full_url_for('GET_TOPIC', {slug : 'php-laravel'}) }}"> Laravel </a></li>
-                <li><a href="{{ full_url_for('GET_TOPIC', {slug : 'php-high-level'}) }}"> Kĩ Thuật </a></li>
+                <li><a href="{{ Route('CLIENT_GET_CATE', ['slug' => 'php-core']) }}">PHP CORE</a></li>
+                <li><a href="{{ Route('CLIENT_GET_CATE', ['slug' => 'php-slim']) }}"> Slim Framework</a></li>
+                <li><a href="{{ Route('CLIENT_GET_CATE', ['slug' => 'php-laravel']) }}"> Laravel </a></li>
+                <li><a href="{{ Route('CLIENT_GET_CATE', ['slug' => 'php-high-level']) }}"> Kĩ Thuật </a></li>
             </ul>
         </li>
-        <li class="{{ is_routers(
-                        full_url_for('GET_TOPIC' , {slug : ''}), 
-                        ['java-core', 'java-spring']
-                    ) }}">
+        <li class="{{ Route::is('CLIENT_GET_CATE' , ['slug' => 'java-core']) ? 'active' : null }}
+            {{ Route::is('CLIENT_GET_CATE' , ['slug' => 'java-spring']) ? 'active' : null }}">
             <a>
-                JAVA <span class="icon-menu-angle-down">{% include "genneral/svg/angle-down.svg" %} </span>
+                JAVA <span class="icon-menu-angle-down">@include ("genneral.svg.angle-down") </span>
             </a>
             <ul class="submenu">
-                <li><a href="{{ full_url_for('GET_TOPIC', {slug : 'java-core'}) }}">JAVA CORE</a></li>
-                <li><a href="{{ full_url_for('GET_TOPIC', {slug : 'java-spring'}) }}">JAVA Spring</a></li>
+                <li><a href="{{ Route('CLIENT_GET_CATE', ['slug' => 'java-core']) }}">JAVA CORE</a></li>
+                <li><a href="{{ Route('CLIENT_GET_CATE', ['slug' => 'java-spring']) }}">JAVA Spring</a></li>
             </ul>
         </li>
         <li class="js-user-login-data-menu position-relative d-none">
             <a class="js-user-infor">
                 <img class="js-user-avatar menu-avatar" src="" alt="">
-                <span class="icon-menu-angle-down">{% include "genneral/svg/angle-down.svg" %} </span>
+                <span class="icon-menu-angle-down">@include ("genneral.svg.angle-down") </span>
             </a>
             <ul class="submenu">
                 <li class="text-infor-user-login">
@@ -66,7 +64,7 @@
                 <li>
                     <a href="/notification">
                         <span class="icon-menu-angle-down">
-                            {% include "genneral/svg/bell-notification.svg" %} 
+                            @include ("genneral.svg.bell-notification")
                         </span> 
                         thông báo 
                         <span id="js-total-notification" class="total-notification"> 0 </span>
