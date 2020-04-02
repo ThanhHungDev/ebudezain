@@ -14,9 +14,9 @@
                             @include ("genneral.svg.map-marker-alt")
                         </div>
                         <div class="float-left">
-                            <p>{{ config('system.information.address') }}</p>
+                            <p>{{ config('system.site.information.address') }}</p>
                             <strong class="text-base font-bold">
-                                {{ config('system.information.area') }}
+                                {{ config('system.site.information.area') }}
                             </strong>
                         </div>
                     </div>
@@ -46,7 +46,7 @@
             </div>
             <div class="col-5 col-lg-6 col-sm-12 text-center-mobile">
                 <h3 class="text-default font-bold text-xl capitalize">{{ config('system.sitename') }}</h3>
-                <div class="pt-3 text-light">{{ config('system.site.description') }}</div>
+                <div class="pt-3 text-light">{!! config('system.site.description') !!}</div>
                 <div class="pt-4">
                     <a class="soccial-link" href="https://www.facebook.com/HungSmurf">
                         @include ("genneral.svg.facebook-square")

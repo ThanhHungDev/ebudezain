@@ -8,10 +8,13 @@ return [
     ],
     'SESSION_LANGUAGE' => 'WEBSITE_LANGUAGE',
     'site'      => [
-        'description' => 'ahihi',
+        'description' => 'Blog lập trình được phát triển nhằm mục đích chia sẽ kiến thức cho cộng đồng lập trình Việt Nam. <br/> 
+                            Hy vọng blog sẽ giúp ích cho các bạn có đam mê lập trình',
         'information' => [
-            'address' => '0674 lộc hoà',
-            'area'    => 'bình giã châu đức bà rịa vũng tàu'
+            'address' => '0674, Lộc Hoà, Bình Giã',
+            'area'    => 'Châu đức, Bà Rịa Vũng Tàu'
         ]
-    ]
+    ],
+    'limit' => 10
+
 ];

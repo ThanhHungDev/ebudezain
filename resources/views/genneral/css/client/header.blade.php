@@ -271,6 +271,9 @@
         content: ")";
         color: #b8333e;
     }
+    .search-form-mobile{
+        display: none;
+    }
     /*Tablet devices (768px to 992px and down)*/
     @media screen and (max-width: 991.98px) {
         .list-wrapper .menu{
@@ -280,6 +283,9 @@
             padding: 15px 10px 10px;
             font-size: 14px;
         }
+        .search-form-mobile{
+            display: none;
+        }
     }
     /*Medium devices (Small devices, 576px to 768px)*/
     @media screen and (max-width: 767.98px) {
@@ -287,9 +293,17 @@
             float: none!important;
             margin: 0 auto;
         }
-    }
-    /*Medium devices (Small devices, 576px to 768px)*/
-    @media screen and (max-width: 767.98px) {
+        .search-form-mobile{
+            display: block;
+            display: block;
+            line-height: 21px;
+            font-size: 21px;
+            color: #fff;
+            margin-left: 0;
+            padding: 12px 30px 12px 12px;
+            font-weight: bold;
+            text-align: left;
+        }
         #toggle-menu:checked ~ .list-wrapper{
             left: 0;
             right: 0;

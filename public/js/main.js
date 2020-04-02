@@ -5,14 +5,14 @@ Date.prototype.strFormatDate = function(){
 //////////////////////////////////////
 const SYSTEM_MAX_WIDTH_MOBILE = '767';
 $(document).ready(function(){
-    if (typeof(Storage) !== 'undefined') {
-        var user = localStorage.getItem('user');
-        user = JSON.parse(user);
-        console.log(user , " get data user before from Storage");
-        if(user) updateDataUserToHtml(user);
-    } else {
-        alert('ứng dụng không chạy tốt trên trình duyệt này, vui lòng nâng cấp trình duyệt');
-    }
+    // if (typeof(Storage) !== 'undefined') {
+    //     var user = localStorage.getItem('user');
+    //     user = JSON.parse(user);
+    //     console.log(user , " get data user before from Storage");
+    //     if(user) updateDataUserToHtml(user);
+    // } else {
+    //     alert('ứng dụng không chạy tốt trên trình duyệt này, vui lòng nâng cấp trình duyệt');
+    // }
     triggerKeyEnterFormSubmit( "js-modal-register", "js-btn-register-submit-form" );
     triggerKeyEnterFormSubmit( "js-modal-login", "js-btn-login-submit-form" );
     $(".table-content li>a").click(function() {
@@ -26,8 +26,14 @@ $(document).ready(function(){
         if ($(window).width() < 768){
             console.log( "mobile" );
             /// remove all active 
-            list_head.removeClass("active");
-            $( this ).addClass( "active" );
+            if($( this ).hasClass('active')){
+                list_head.removeClass("active");
+            }else{
+                list_head.removeClass("active");
+                $( this ).addClass( "active" );
+            }
+            
+            
         }
         console.log( "list_head click" );
     });
@@ -431,37 +437,37 @@ function updateMenuLogin(){
     }
 }
 //////////////////////////////////////////////////
-socket.on("SOCKET_RESPONSE_JOIN_CHANNEL", function(response){
-    if( response.code != 200 ){
-        console.log("data trả ra của SOCKET_RESPONSE_JOIN_CHANNEL là : sai ");
-        refeshAuthentication();
-    }else{
-        console.log("data trả ra của SOCKET_RESPONSE_JOIN_CHANNEL là : đúng ");
-        document.getElementById("js-channel-name").value = response.data;
+// socket.on("SOCKET_RESPONSE_JOIN_CHANNEL", function(response){
+//     if( response.code != 200 ){
+//         console.log("data trả ra của SOCKET_RESPONSE_JOIN_CHANNEL là : sai ");
+//         refeshAuthentication();
+//     }else{
+//         console.log("data trả ra của SOCKET_RESPONSE_JOIN_CHANNEL là : đúng ");
+//         document.getElementById("js-channel-name").value = response.data;
         
-    }
-    console.log(response);
-});
-socket.on("CHANNEL_MESSAGE_RESPONSE", function(response){
-    console.log(response);
-    if( response.code != 200 ){
-        console.log("CHANNEL_MESSAGE_RESPONSE : that bai ");
-        alert("có lỗi sảy ra, vui lòng thử lại sau!");
-        location.reload();
-    }else{
-        console.log("CHANNEL_MESSAGE_RESPONSE : thanh cong ");
-        resetCommentContentFromHtml();
-        if( response.data.user_infor ){
-            updateCommentHtml(response.data.comment_result, response.data.user_infor);
-        }
-    }
-});
-socket.on("NOTIFICATION_RESPONSE", function(response){
-    console.log(response);
-    if( response.code != 200 ){
-        console.log("NOTIFICATION_RESPONSE : that bai ");
-    }else{
-        console.log("NOTIFICATION_RESPONSE : thanh cong ");
-        document.getElementById("js-total-notification").innerHTML = response.data;
-    }
-});
+//     }
+//     console.log(response);
+// });
+// socket.on("CHANNEL_MESSAGE_RESPONSE", function(response){
+//     console.log(response);
+//     if( response.code != 200 ){
+//         console.log("CHANNEL_MESSAGE_RESPONSE : that bai ");
+//         alert("có lỗi sảy ra, vui lòng thử lại sau!");
+//         location.reload();
+//     }else{
+//         console.log("CHANNEL_MESSAGE_RESPONSE : thanh cong ");
+//         resetCommentContentFromHtml();
+//         if( response.data.user_infor ){
+//             updateCommentHtml(response.data.comment_result, response.data.user_infor);
+//         }
+//     }
+// });
+// socket.on("NOTIFICATION_RESPONSE", function(response){
+//     console.log(response);
+//     if( response.code != 200 ){
+//         console.log("NOTIFICATION_RESPONSE : that bai ");
+//     }else{
+//         console.log("NOTIFICATION_RESPONSE : thanh cong ");
+//         document.getElementById("js-total-notification").innerHTML = response.data;
+//     }
+// });

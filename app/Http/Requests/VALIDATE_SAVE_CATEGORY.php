@@ -19,7 +19,7 @@ class VALIDATE_SAVE_CATEGORY extends FormRequest
     public function rules()
     {
         return [
-            'name'            => 'required|max:255ß',
+            'name'            => 'required|max:255',
             'slug'            => 'required|max:255',
             'excerpt'         => 'required|max:255',
             'thumbnail'       => 'required|max:255',

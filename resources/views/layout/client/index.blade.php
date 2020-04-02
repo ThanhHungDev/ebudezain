@@ -48,7 +48,7 @@
         }
     }
     </script>
-    <script type="text/javascript" src="{{ base_url() ~ '/js/socket.io.js'}}"></script>
+
     <script type="text/javascript" src="{{ base_url() ~ '/js/markdown/converter.js'}}"></script>
     <script type="text/javascript" src="{{ base_url() ~ '/js/markdown/sanitizer.js'}}"></script>
     <script type="text/javascript" src="{{ base_url() ~ '/js/markdown/editor.js'}}"></script>

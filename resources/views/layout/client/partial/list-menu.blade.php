@@ -52,31 +52,17 @@
                 <li><a href="{{ Route('CLIENT_GET_CATE', ['slug' => 'java-spring']) }}">JAVA Spring</a></li>
             </ul>
         </li>
-        <li class="js-user-login-data-menu position-relative d-none">
-            <a class="js-user-infor">
-                <img class="js-user-avatar menu-avatar" src="" alt="">
-                <span class="icon-menu-angle-down">@include ("genneral.svg.angle-down") </span>
-            </a>
-            <ul class="submenu">
-                <li class="text-infor-user-login">
-                    bạn đang đăng nhập với tài khoản <span class="js-name-user">trương thanh hùng</span>
-                </li>
-                <li>
-                    <a href="/notification">
-                        <span class="icon-menu-angle-down">
-                            @include ("genneral.svg.bell-notification")
-                        </span> 
-                        thông báo 
-                        <span id="js-total-notification" class="total-notification"> 0 </span>
-                    </a>
-                </li>
-                <li onclick="logout()">
-                    <a href="javascript:void(0)">đăng xuất</a>
-                </li>
-            </ul>
+        <li class="{{ Route::is('CLIENT_GET_CATE' , ['slug' => 'java-core']) ? 'active' : null }}
+            {{ Route::is('CLIENT_GET_CATE' , ['slug' => 'java-spring']) ? 'active' : null }}">
+            <a href="{{ Route('CLIENT_GET_CATE', ['slug' => 'design-pattern']) }}"> DESIGN PATTERN </a>
         </li>
-        <li class="js-user-login-modal-menu">
-            <a href="#js-modal-login">Login</a>
+        <li>
+            <form class="search-form-mobile" action="{{ Route('SEARCH') }}" autocomplete="off">
+                <div class="group-control position-relative">
+                    <input type="text" placeholder="tìm kiếm..." name="q" autocomplete="off">
+                    <button type="submit">@include ("genneral.svg.search-plus" )</button>
+                </div>
+            </form>
         </li>
     </ul>
 </div>

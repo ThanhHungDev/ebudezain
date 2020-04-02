@@ -13,9 +13,9 @@
             @include ("genneral.svg.search-plus" )
             @include ("genneral.svg.close" )
         </label>
-        <form class="search-show" action="#search" autocomplete="off">
+        <form class="search-show" action="{{ Route('SEARCH') }}" autocomplete="off">
             <div class="group-control position-relative">
-                <input type="text" placeholder="Search.." name="q" autocomplete="off">
+                <input type="text" placeholder="tìm kiếm..." name="q" autocomplete="off">
                 <button type="submit">@include ("genneral.svg.search-plus" )</button>
             </div>
         </form>

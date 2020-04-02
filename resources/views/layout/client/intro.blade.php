@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    @include("layout.client.partial.favicon")
-    
+    {{-- @include("layout.client.partial.favicon") --}}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -17,28 +16,27 @@
     @include("genneral.css.client.developer")
     
     <script type="text/javascript" src="{{ asset('/jquery.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/socket.io.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/modal.jquery.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/detect.js') }}"></script>
     <script>
         const SYSTEM_BASE_URL = "{{ asset('') }}";
         const SYSTEM_API_URL = "{{ asset('') . ':3000' }}";
-        const socket = io.connect(SYSTEM_API_URL, {
-            reconnection: true,
-            reconnectionDelay: 1000,
-            reconnectionDelayMax : 5000,
-            reconnectionAttempts: 99999
-        });
-        socket.on('connect', function () {
-            $(".header-wrapper-menu").removeClass('border-bottom').removeClass('border-danger').removeClass('js-socket-fail');
-        });
-        socket.on('disconnect', function(){
-            $(".header-wrapper-menu").addClass('border-bottom').addClass('border-danger').addClass('js-socket-fail');
-        });
-        socket.on('error', function() {
-            $(".header-wrapper-menu").addClass('border-bottom').addClass('border-danger').addClass('js-socket-fail');
-        });
-        const slug = "{{ 1 }}";
+        // const socket = io.connect(SYSTEM_API_URL, {
+        //     reconnection: true,
+        //     reconnectionDelay: 1000,
+        //     reconnectionDelayMax : 5000,
+        //     reconnectionAttempts: 99999
+        // });
+        // socket.on('connect', function () {
+        //     $(".header-wrapper-menu").removeClass('border-bottom').removeClass('border-danger').removeClass('js-socket-fail');
+        // });
+        // socket.on('disconnect', function(){
+        //     $(".header-wrapper-menu").addClass('border-bottom').addClass('border-danger').addClass('js-socket-fail');
+        // });
+        // socket.on('error', function() {
+        //     $(".header-wrapper-menu").addClass('border-bottom').addClass('border-danger').addClass('js-socket-fail');
+        // });
+        // const slug = "{{ 1 }}";
     </script>
 </head>
 <body>
