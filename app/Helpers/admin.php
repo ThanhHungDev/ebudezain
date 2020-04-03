@@ -7,3 +7,6 @@ function limitText($content = false, $limit = false, $ellipsis = '...') {
     }
     return $content;
 }
+function is_assoc($arr) {
+	return is_array($arr) and (array_values($arr) !== $arr);
+}

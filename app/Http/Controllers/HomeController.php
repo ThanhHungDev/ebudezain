@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\FactoryModel\IFactoryModel;
 use App\Http\Controllers\Controller;
 use App\Model\PostModel;
 use Cookie;
@@ -10,6 +11,13 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
+
+    private $nomalModel = null;
+
+    public function __construct(IFactoryModel $model) // Ở đây Service Container sẽ "tiêm" instance của RedisEventPusher vào
+    {
+        $this->nomalModel = $model;
+    }
 
     public function changeLanguage($language){
 
@@ -20,9 +28,19 @@ class HomeController extends Controller
         return redirect()->back()->withCookie($cookie);
     }
 
+    public function post( $slug ){
+
+        $postModel = $this->nomalModel->createPostModel();
+        $post = $postModel->firstPostBySlug($slug);
+        
+        $sidebar = $this->data_sidebar( $post->id );
+        return $this->container->view->render( $res , 'client/post.twig', compact(['post', 'comments', 'slug', 'sidebar']) );
+    }
+
     public function home(){
         return view('client.home');
     }
+
     public function cate($slug = null){
         return 1;
     }
