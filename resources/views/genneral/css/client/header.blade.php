@@ -295,7 +295,6 @@
         }
         .search-form-mobile{
             display: block;
-            display: block;
             line-height: 21px;
             font-size: 21px;
             color: #fff;
@@ -303,6 +302,24 @@
             padding: 12px 30px 12px 12px;
             font-weight: bold;
             text-align: left;
+        }
+        .search-form-mobile input{
+            height: 45px;
+            width: 100%;
+            color: #525666;
+            background-color: #fff;
+            padding-left: 20px;
+            border-radius: 0;
+            font-size: 15px;
+            transition: border .3s linear;
+            border: 1px solid #ccc;
+        }
+        .search-form-mobile button{
+            position: absolute;
+            top: 10%;
+            right: 15px;
+            width: 40px;
+            height: 40px;
         }
         #toggle-menu:checked ~ .list-wrapper{
             left: 0;
