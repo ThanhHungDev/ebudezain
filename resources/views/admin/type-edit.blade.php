@@ -22,7 +22,7 @@
                     @endif
                     @if (Session::has('SAVE_SUCCESS'))
                     <div class="alert alert-success">
-                        lưu bài viết thành công
+                        edit phân loại thành công
                     </div>
                     @endif
                     @if(!empty($errors->all()))

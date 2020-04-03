@@ -3,10 +3,13 @@
 namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class PostModel extends Model
 {
-    protected $table = 'post';
+    protected $table                     = 'post';
+    
+    
     /**
      * là mối quan hệ dạng nhiều nhiều ví dụ : product -> activity -> style thì thứ tự sẽ là như dưới
      */
@@ -14,9 +17,9 @@ class PostModel extends Model
         return $this->belongsToMany(CategoryStyleModel::class, 'post_active_style', 'post_id', 'style_id');
     }
 
-    public function getPostBySlug($slug){
+    public function firstPostBySlug($slug){
 
-        return $this->where('slug', $slug)->take(1)->get();
+        return $this->where('slug', $slug)->first();
     }
 
     public function type(){
@@ -32,4 +35,5 @@ class PostModel extends Model
         return $this->all();
     }
 
+    
 }

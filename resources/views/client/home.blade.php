@@ -139,8 +139,3 @@
     </div>
 </div>
 @endsection
-<script> 
-	$.get("http://ip-api.com/json", function(response) {
-		console.log(response);
-    }, "json");
-</script>
