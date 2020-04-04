@@ -1,50 +1,11 @@
-<?php
+<?php 
+namespace App\Model;
 
+use App\Transfer\DataSidebarBuilder;
+use App\Transfer\IDataSidebar;
 use App\FactoryModel\IFactoryModel;
 
-interface IDataSidebar{
-    
-    public function build();
-    public function setPost();
-    public function setType();
-    public function setStyle();
-    public function setCategory();
 
-}
-
-
-class DataSidebarBuilder implements IDataSidebar{
-    public $postId;
-    public $typeId;
-    public $styleId;
-    public $categoryId;
-    
-    public function setPost($postId){
-
-        $this->postId = $postId;
-        return $this;
-    }
-    public function setType($typeId){
-
-        $this->typeId = $typeId;
-        return $this;
-    }
-    public function setStyle($styleId){
-
-        $this->styleId = $styleId;
-        return $this;
-    }
-    public function setCategory($categoryId){
-
-        $this->categoryId = $categoryId;
-        return $this;
-    }
-    
-    public function build(){
-        return new DataSidebar($this);
-    }
-
-} 
 class DataSidebar{
     
     public static $TABLE_POST_NEW           = 'post_new';
@@ -55,6 +16,7 @@ class DataSidebar{
     private $typeId;
     private $styleId;
     private $categoryId;
+    private $limit;
 
     private $DF_CONDITION_POST_RELATE = array(0 , 0 , 10);
     private $DF_CONDITION_POST_RELATE_IGNORE = array(0 , 0, "0", 10);
@@ -67,27 +29,39 @@ class DataSidebar{
         $this->typeId     = (int)$builder->typeId;
         $this->styleId    = (int)$builder->styleId;
         $this->categoryId = (int)$builder->categoryId;
+        $this->limit      = (int)$builder->limit;
+        $this->diff       = $builder->diff;
 
         $this->nomalModel = $model;
     }
 
     public function getPostsNew(){
 
-        return $this->nomalModel->createDBModel()->table($this->distanceViewPostNew);
+        return $this->nomalModel->createDBModel()->table(self::$TABLE_POST_NEW);
     }
 
     private function renderConditionPostRelate(): array{
         $condition = array();
 
-        if(!$this->postId){
+        if(!$this->postId && !$this->typeId){
             return $this->DF_CONDITION_POST_RELATE;
         }
-
-
-        $condition = array( $this->postId, $this->typeId, );
+        $condition = array( $this->postId, $this->typeId, $this->limit);
 
         return $condition;
     }
+
+    private function renderConditionPostRelateIgnore(): array{
+        $condition = array();
+
+        if(!$this->postId && !$this->typeId){
+            return $this->DF_CONDITION_POST_RELATE_IGNORE;
+        }
+        $condition = array( $this->postId, $this->typeId, $this->diff, $this->limit);
+
+        return $condition;
+    }
+
     public function getPostsRelate(){
 
         $condition = $this->renderConditionPostRelate();
@@ -96,11 +70,7 @@ class DataSidebar{
 
     public function getPostsRelateIgnore($condition){
 
-        $DEFAULT_CONDITION_NULL = array(0 , 0 , "0", 10);
-
-        if(is_assoc($condition)){
-            $condition = $DEFAULT_CONDITION_NULL;
-        }
+        $condition = $this->renderConditionPostRelateIgnore();
         return $this->nomalModel->createDBModel()->table($this->procedurePostRelate, $condition);
     }
     

@@ -50,6 +50,7 @@ BEGIN
 END; $$
 DELIMITER ;
 
+DELIMITER $$
 CREATE PROCEDURE post_relate_ignore (
 	_post_id INT, 
     _type_id INT, 
@@ -100,4 +101,5 @@ BEGIN
         ORDER BY ABS(id - _post_id ) ASC, created_at DESC
         LIMIT _limit;
 	END IF;
-END;
+END; $$
+DELIMITER ;

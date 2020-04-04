@@ -320,6 +320,9 @@
             right: 15px;
             width: 40px;
             height: 40px;
+            background-color: transparent;
+            border-color: transparent;
+            border-radius: 0px;
         }
         #toggle-menu:checked ~ .list-wrapper{
             left: 0;
