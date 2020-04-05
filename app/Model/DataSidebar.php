@@ -8,9 +8,9 @@ use App\FactoryModel\IFactoryModel;
 
 class DataSidebar{
     
-    public static $TABLE_POST_NEW           = 'post_new';
-    public static $TABLE_POST_RELATE        = 'call post_relate( ?, ?, ? );';
-    public static $TABLE_POST_RELATE_IGNORE = 'call post_relate_ignore( ?, ?, ?, ? );';
+    public $TABLE_POST_NEW           = 'post_new';
+    public $TABLE_POST_RELATE        = 'call post_relate';
+    public $TABLE_POST_RELATE_IGNORE = 'call post_relate_ignore';
 
     private $postId;
     private $typeId;
@@ -37,7 +37,7 @@ class DataSidebar{
 
     public function getPostsNew(){
 
-        return $this->nomalModel->createDBModel()->table(self::$TABLE_POST_NEW);
+        return call_user_func(array($this->nomalModel->createDBModel(), 'table'), $this->TABLE_POST_NEW);
     }
 
     private function renderConditionPostRelate(): array{
@@ -65,13 +65,15 @@ class DataSidebar{
     public function getPostsRelate(){
 
         $condition = $this->renderConditionPostRelate();
-        return $this->nomalModel->createDBModel()->table($this->procedurePostRelate, $condition);
+        $query = $this->TABLE_POST_RELATE . " ( " . implode(", " , $condition) . " ) ";
+        return call_user_func_array(array($this->nomalModel->createDBModel(), 'raw'), array( $query ));
     }
 
     public function getPostsRelateIgnore($condition){
 
         $condition = $this->renderConditionPostRelateIgnore();
-        return $this->nomalModel->createDBModel()->table($this->procedurePostRelate, $condition);
+        $query = $this->TABLE_POST_RELATE_IGNORE . " ( " . implode(", " , $condition) . " ) ";
+        return call_user_func_array(array($this->nomalModel->createDBModel(), 'raw'), array( $query ));
     }
     
 } 

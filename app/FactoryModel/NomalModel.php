@@ -86,8 +86,9 @@ class NomalModel implements IFactoryModel{
     public function createDBModel(){
 
         if(!self::$DBModel){
-            self::$DBModel = new DB();
+            self::$DBModel = DB::class;
         }
+        
         return self::$DBModel;
     }
 }
