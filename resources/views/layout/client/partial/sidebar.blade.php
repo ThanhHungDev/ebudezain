@@ -29,7 +29,7 @@
         <ul class="list-sidebar clear">
             @if ($sidebar['postNew'])
             @foreach( $sidebar['postNew'] as $post)
-            <li class="{{ Route::is('CLIENT_GET_POST' , ['slug' => $post->slug ]) ? 'active' : null }}">
+            <li class="{{ @$slug == $post->slug ? 'active' : null }}">
                 <a href="{{  Route('CLIENT_GET_POST', ['slug' => $post->slug ]) }}">
                     {{ $post->title }}
                 </a>
@@ -40,28 +40,29 @@
     </div>
     @endif
     
-    {{-- {% if sidebar.related %}
+    @if( $sidebar['postRelate'])
     <div class="block-sidebar clear">
         <input type="checkbox" id="post-relation" class="checkbox-sidebar d-none">
 
         <label for="post-relation" class="title-sidebar aqua-gradient-rgba d-block clear">
-            <span class="ballot-icon">{% include "genneral/svg/ballot.svg" %}</span>
+            <span class="ballot-icon">@include ("genneral.svg.ballot")</span>
             quan tam
-            <span class="angle-down-icon float-right">{% include "genneral/svg/angle-down.svg" %}</span>
-            <span class="angle-right-icon float-right">{% include "genneral/svg/angle-right.svg" %}</span>
+            <span class="angle-down-icon float-right">@include ("genneral.svg.angle-down")</span>
+            <span class="angle-right-icon float-right">@include ("genneral.svg.angle-right")</span>
         </label>
 
         <ul class="list-sidebar clear">
-            {% if sidebar.related %}
-            {% for post in sidebar.related %}
-            <li class="{{ activeRouter( full_url_for('GET_POST', {slug : post.slug})) }}">
-                <a href="{{  full_url_for('GET_POST', {slug : post.slug}) }}">
-                    {{post.title}}
+            @if( $sidebar['postRelate'])
+            @foreach($sidebar['postRelate'] as $post )
+            
+            <li class="{{ @$slug == $post->slug ? 'active' : null }}">
+                <a href="{{  Route('CLIENT_GET_POST', ['slug' => $post->slug ]) }}">
+                    {{ $post->title }}
                 </a>
             </li>
-            {% endfor %}
-            {% endif %}
+            @endforeach
+            @endif
         </ul>
     </div>
-    {% endif %} --}}
+    @endif
 </div>

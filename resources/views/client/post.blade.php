@@ -17,10 +17,7 @@
             <img style="width: 100%; height: auto; max-width: 600px;" src="{{ asset( $post->thumbnail ) }}" alt="{{ $post->title}}"/>
         </div>
         <div class="content-page-post">
-            @php 
-            $hung = $post->content;
-            echo $hung;
-            @endphp 
+            {!! $post->content !!}
         </div>
     </div>
 </div>

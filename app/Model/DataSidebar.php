@@ -84,7 +84,7 @@ class DataSidebar{
         } 
 
         $queryResult->execute(); 
-        $results = $queryResult->fetchAll(\PDO::FETCH_ASSOC);
+        $results = $queryResult->fetchAll(\PDO::FETCH_CLASS);
 
         return $results;
     }
@@ -105,7 +105,7 @@ class DataSidebar{
         } 
 
         $queryResult->execute(); 
-        $results = $queryResult->fetchAll(\PDO::FETCH_ASSOC);
+        $results = $queryResult->fetchAll(\PDO::FETCH_CLASS);
 
         return $results;
     }
