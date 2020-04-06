@@ -5,11 +5,11 @@ namespace App\Http\Controllers;
 use App\FactoryModel\IFactoryModel;
 use App\Http\Controllers\Controller;
 use App\Model\PostModel;
-use Cookie;
 use Config;
 use Illuminate\Http\Request;
 use App\Transfer\DataSidebarBuilder;
 use App\Model\DataSidebar;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -33,17 +33,25 @@ class HomeController extends Controller
     public function post( $slug ){
         $DF_LIMIT = config('system.limit');
 
-        $postModel = $this->nomalModel->createPostModel();
-        $post = $postModel->firstPostBySlug($slug);
-        $contentPost = $post->content;
-        $sidebarModel = (new DataSidebarBuilder())
-                            ->setModel($this->nomalModel)
-                            ->setPost($post->id)
-                            ->settype($post->category_type_id)
-                            ->setLimit($DF_LIMIT)
-                            ->build();
-        $sidebar['postNew'] = $sidebarModel->getPostsNew()->get();
-        ///$postRelate = $sidebar->getPostsRelate();
+        $postModel    = $this->nomalModel->createPostModel();
+        $post         = $postModel->firstPostBySlug($slug);
+        $contentPost  = $post->content;
+        $sidebarBuilder = new DataSidebarBuilder();
+        $sidebarModel = $sidebarBuilder
+                        ->setModel($this->nomalModel)
+                        ->setPost($post->id)
+                        ->settype($post->category_type_id)
+                        ->setLimit($DF_LIMIT)
+                        ->build();
+
+        $sidebar['postNew']    = $sidebarModel->getPostsNew()->get()->toArray();
+        $sidebar['postRelate'] = $sidebarModel->getPostsRelate();
+
+        $postRelateIgnore = array_map(function($item){ return $item->id; }, $sidebar['postNew']);
+        $sidebarModel     = $sidebarBuilder->setJobIgnore(implode(", ", $postRelateIgnore))->build();
+
+        $sidebar['postRelateIgnore'] = $sidebarModel->getPostsRelateIgnore();
+
         return view('client/post', compact(['post', 'slug', 'sidebar']) );
     }
 
