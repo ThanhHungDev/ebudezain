@@ -9,8 +9,10 @@ use App\FactoryModel\IFactoryModel;
 class DataSidebar{
     
     public $TABLE_POST_NEW           = 'post_new';
-    public $TABLE_POST_RELATE        = 'call post_relate';
-    public $TABLE_POST_RELATE_IGNORE = 'call post_relate_ignore';
+    public $TABLE_POST_RELATE        = "call post_relate(?, ?, ?)";
+    public $TABLE_POST_RELATE_IGNORE = "call post_relate_ignore(?, ?, ?, ?)";
+
+    public static $CONNECTION_PDO = null;
 
     private $postId;
     private $typeId;
@@ -62,18 +64,50 @@ class DataSidebar{
         return $condition;
     }
 
-    public function getPostsRelate(){
-
-        $condition = $this->renderConditionPostRelate();
-        $query = $this->TABLE_POST_RELATE . " ( " . implode(", " , $condition) . " ) ";
-        return call_user_func_array(array($this->nomalModel->createDBModel(), 'raw'), array( $query ));
+    private function setConnectionPDO(){
+        if(!self::$CONNECTION_PDO){
+            $DB         = $this->nomalModel->createDBModel();
+            $db         = $DB::connection()->getPdo();
+            self::$CONNECTION_PDO = $db;
+        }
     }
 
-    public function getPostsRelateIgnore($condition){
+    public function getPostsRelate(){
 
-        $condition = $this->renderConditionPostRelateIgnore();
-        $query = $this->TABLE_POST_RELATE_IGNORE . " ( " . implode(", " , $condition) . " ) ";
-        return call_user_func_array(array($this->nomalModel->createDBModel(), 'raw'), array( $query ));
+        $this->setConnectionPDO();
+
+        $conditions = $this->renderConditionPostRelate();
+        
+        $queryResult = self::$CONNECTION_PDO->prepare($this->TABLE_POST_RELATE);
+        foreach($conditions as $key => $param ){
+            $queryResult->bindParam( $key + 1, $param, \PDO::PARAM_INT); 
+        } 
+
+        $queryResult->execute(); 
+        $results = $queryResult->fetchAll(\PDO::FETCH_ASSOC);
+
+        return $results;
+    }
+
+    public function getPostsRelateIgnore(){
+
+        $this->setConnectionPDO();
+
+        $conditions = $this->renderConditionPostRelateIgnore();
+
+        $queryResult = self::$CONNECTION_PDO->prepare($this->TABLE_POST_RELATE);
+        foreach($conditions as $key => $param ){
+            if($key != 2 ){
+                $queryResult->bindParam( $key + 1, $param, \PDO::PARAM_INT);
+            }else{
+                $queryResult->bindParam( $key + 1, $param, \PDO::PARAM_STR);
+            }
+        } 
+
+        $queryResult->execute(); 
+        $results = $queryResult->fetchAll(\PDO::FETCH_ASSOC);
+
+        return $results;
     }
     
 } 

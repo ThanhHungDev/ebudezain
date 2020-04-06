@@ -40,6 +40,9 @@ class DataSidebarBuilder implements IDataSidebar{
         return $this;
     }
 
+    /**
+     * jobIgnore is string ( 1, 3 , 4)
+     */
     public function setJobIgnore($jobIgnore){
 
         $this->diff = $jobIgnore;

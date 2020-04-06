@@ -1,8 +1,9 @@
+DROP PROCEDURE IF EXISTS post_relate;
 DELIMITER $$
 CREATE PROCEDURE post_relate (
-	in _post_id INT,
-    in _type_id INT,
-    in _limit	INT)
+	_post_id INT,
+    _type_id INT,
+    _limit	INT)
 BEGIN
    	IF _post_id = 0 THEN
         SELECT  
@@ -26,8 +27,9 @@ BEGIN
         ORDER BY created_at DESC
         LIMIT _limit;
    	ELSE
+        SET sql_mode = 'NO_UNSIGNED_SUBTRACTION';
     	SELECT  
-             id,
+            id,
             title,
             slug,
             excerpt,
@@ -43,8 +45,8 @@ BEGIN
             updated_at,
             created_at
         FROM post
-        WHERE ABS(id - _post_id ) > 0 
-        ORDER BY ABS(id - _post_id ) ASC, created_at DESC
+        WHERE ABS( id - _post_id ) > 0 
+        ORDER BY ABS( id - _post_id) ASC, created_at DESC
         LIMIT _limit;
 	END IF;
 END; $$
@@ -59,7 +61,7 @@ CREATE PROCEDURE post_relate_ignore (
 )
 BEGIN
    	IF _post_id = 0 THEN
-            SELECT  
+        SELECT  
             id,
             title,
             slug,
@@ -80,7 +82,8 @@ BEGIN
         ORDER BY created_at DESC
         LIMIT _limit;
    	ELSE
-            SELECT  
+        SET sql_mode = 'NO_UNSIGNED_SUBTRACTION';
+        SELECT  
             id,
             title,
             slug,
