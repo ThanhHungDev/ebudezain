@@ -95,7 +95,7 @@ class DataSidebar{
 
         $conditions = $this->renderConditionPostRelateIgnore();
 
-        $queryResult = self::$CONNECTION_PDO->prepare($this->TABLE_POST_RELATE);
+        $queryResult = self::$CONNECTION_PDO->prepare($this->TABLE_POST_RELATE_IGNORE);
         foreach($conditions as $key => $param ){
             if($key != 2 ){
                 $queryResult->bindParam( $key + 1, $param, \PDO::PARAM_INT);

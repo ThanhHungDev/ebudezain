@@ -1,4 +1,16 @@
 <style>
+    .main-content-data .h1 {
+        margin-top: 0;
+        margin-bottom: 7px;
+        word-wrap: break-word;
+        font-size: 41px;
+        line-height: 50px;
+    }
+
+    .main-content-data  .entry-thumb {
+        margin-bottom: 26px;
+    }
+
     .main-content-data p {
         line-height: inherit;
         font-size: inherit;
@@ -99,9 +111,8 @@
     
     
     .main-content-data a {
-        box-shadow: inset 0 -1px 0 currentColor;
-        box-shadow: inset 0 -1px 0 currentColor, 4px 0 0 transparent, -4px 0 0 transparent;
-        box-decoration-break: clone;
+        border-bottom: none!important;
+        
         color: inherit;
         padding-bottom: .05em;
         padding-top: .05em;

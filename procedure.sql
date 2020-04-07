@@ -52,6 +52,9 @@ BEGIN
 END; $$
 DELIMITER ;
 
+
+
+DROP PROCEDURE IF EXISTS post_relate_ignore;
 DELIMITER $$
 CREATE PROCEDURE post_relate_ignore (
 	_post_id INT, 
@@ -78,7 +81,7 @@ BEGIN
             updated_at,
             created_at
         FROM post
-        WHERE category_type_id = _type_id  AND FIND_IN_SET(id, _diff) <= 0  
+        WHERE category_type_id = _type_id  AND FIND_IN_SET(id, _diff) < 0  
         ORDER BY created_at DESC
         LIMIT _limit;
    	ELSE
@@ -100,7 +103,7 @@ BEGIN
             updated_at,
             created_at
         FROM post
-        WHERE ABS(id - _post_id ) > 0 AND  FIND_IN_SET(id, _diff) <= 0  
+        WHERE ABS(id - _post_id ) > 0 AND  FIND_IN_SET(id, _diff) < 0  
         ORDER BY ABS(id - _post_id ) ASC, created_at DESC
         LIMIT _limit;
 	END IF;

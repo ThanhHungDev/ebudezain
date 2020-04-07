@@ -14,7 +14,7 @@
             {{ $post->title }} 
         </h1>
         <div class="w-100 text-center pt-4">
-            <img style="width: 100%; height: auto; max-width: 600px;" src="{{ asset( $post->thumbnail ) }}" alt="{{ $post->title}}"/>
+            <img class="entry-thumb" style="width: 100%; height: auto; max-width: 600px;" src="{{ asset( $post->thumbnail ) }}" alt="{{ $post->title}}"/>
         </div>
         <div class="content-page-post">
             {!! $post->content !!}

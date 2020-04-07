@@ -6,18 +6,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title> {{ $post->title }} </title>
-    <meta name="keywords" content="{{ $post->keywords }}"/>
-    <meta name="description" content="{{ $post->description }}"/>
+    <title> {{ $dataLayout->title }} </title>
+    <meta name="keywords" content="{{ $dataLayout->keywords }}"/>
+    <meta name="description" content="{{ $dataLayout->description }}"/>
     <meta name="author" content="Trương Thanh Hùng - 0797581480 - thanhhung.tud@gmail.com" />
 
     <meta property="og:locale" content="vi_VI" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="{{ $post->title }}" />
-    <meta property="og:description" content="{{ $post->description }}" />
-    <meta property="og:url" content="{{ Route('CLIENT_GET_POST', [ 'slug' => $post->slug ]) }}" />
-    <meta property="og:site_name" content="{{ $post->site_name }}" />
-    <meta property="og:image" content="{{ $post->image_seo }}" />
+    <meta property="og:title" content="{{ $dataLayout->title }}" />
+    <meta property="og:description" content="{{ $dataLayout->description }}" />
+    <meta property="og:url" content="{{ Route('CLIENT_GET_POST', [ 'slug' => $dataLayout->slug ]) }}" />
+    <meta property="og:site_name" content="{{ $dataLayout->site_name }}" />
+    <meta property="og:image" content="{{ $dataLayout->image_seo }}" />
 
     <link rel="stylesheet" href="{{ asset('css/modal.jquery.min.css' ) }}">
     <link rel="stylesheet" href="{{ asset('css/prism.min.css' )}}">
@@ -30,6 +30,7 @@
     @include("genneral.css.client.client")
     @include("genneral.css.client.developer")
     @include("genneral.css.client.sidebar")
+    @include("genneral.css.client.main_content")
     
 
     <script type="text/javascript" src="{{ asset('jquery.min.js') }}"></script>
@@ -58,7 +59,6 @@
         </div>
     </div>
 
-    <input type="text" class="d-none" id="js-post_id" value="{{ $post->id }}"/> 
     <script type="text/javascript" src="{{ asset('js/main.js') }}"></script>
 </body>
 </html>

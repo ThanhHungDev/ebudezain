@@ -22,4 +22,9 @@ class CategoryModel extends Model
             'category_type_id', 
             'id');
     }
+
+    public function firstOrFailCategoryBySlug($slug = null ){
+
+        return $this->where('slug', $slug)->firstOrFail();
+    }
 }

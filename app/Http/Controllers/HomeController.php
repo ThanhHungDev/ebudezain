@@ -52,7 +52,9 @@ class HomeController extends Controller
 
         $sidebar['postRelateIgnore'] = $sidebarModel->getPostsRelateIgnore();
 
-        return view('client/post', compact(['post', 'slug', 'sidebar']) );
+        $dataLayout = $post;
+
+        return view('client.post', compact(['post', 'slug', 'sidebar', 'dataLayout']) );
     }
 
     public function home(){
@@ -61,7 +63,42 @@ class HomeController extends Controller
     }
 
     public function cate($slug = null){
-        return 1;
+        
+        $topic    = null;
+        $DF_LIMIT = config('system.limit');
+
+        $typeModel = $this->nomalModel->createCategoryTypeModel();
+        $topic     = $typeModel->firstOrFailTypeBySlug($slug);
+
+        if( empty($topic) ){
+
+            $styleModel = $this->nomalModel->createCategoryStyleModel();
+            $topic      = $styleModel->firstOrFailStyleBySlug($slug);
+        }
+
+        if( empty($topic) ){
+
+            $categoryModel = $this->nomalModel->createCategoryModel();
+            $topic         = $categoryModel->firstOrFailCategoryBySlug($slug);
+        }
+
+        $sidebarBuilder = new DataSidebarBuilder();
+        $sidebarModel   = $sidebarBuilder
+                        ->setModel($this->nomalModel)
+                        ->settype($topic->id)
+                        ->setLimit($DF_LIMIT)
+                        ->build();
+
+        $sidebar['postNew'] = $sidebarModel->getPostsNew()->get()->toArray();
+
+        $postRelateIgnore = array_map(function($item){ return $item->id; }, $sidebar['postNew']);
+        $sidebarModel     = $sidebarBuilder->setJobIgnore(implode(", ", $postRelateIgnore))->build();
+
+        $sidebar['postRelateIgnore'] = $sidebarModel->getPostsRelateIgnore();
+
+        $dataLayout = $topic;
+
+        return view('client.topic', compact(['topic', 'slug', 'sidebar', 'dataLayout']) );
     }
 
     public function search(Request $request){

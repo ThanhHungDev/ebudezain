@@ -40,7 +40,7 @@
     </div>
     @endif
     
-    @if( $sidebar['postRelate'])
+    @if( $sidebar['postRelateIgnore'])
     <div class="block-sidebar clear">
         <input type="checkbox" id="post-relation" class="checkbox-sidebar d-none">
 
@@ -52,8 +52,8 @@
         </label>
 
         <ul class="list-sidebar clear">
-            @if( $sidebar['postRelate'])
-            @foreach($sidebar['postRelate'] as $post )
+            @if( $sidebar['postRelateIgnore'])
+            @foreach($sidebar['postRelateIgnore'] as $post )
             
             <li class="{{ @$slug == $post->slug ? 'active' : null }}">
                 <a href="{{  Route('CLIENT_GET_POST', ['slug' => $post->slug ]) }}">
