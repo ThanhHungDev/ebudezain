@@ -68,18 +68,18 @@ class HomeController extends Controller
         $DF_LIMIT = config('system.limit');
 
         $typeModel = $this->nomalModel->createCategoryTypeModel();
-        $topic     = $typeModel->firstOrFailTypeBySlug($slug);
+        $topic     = $typeModel->firstTypeBySlug($slug);
 
         if( empty($topic) ){
 
             $styleModel = $this->nomalModel->createCategoryStyleModel();
-            $topic      = $styleModel->firstOrFailStyleBySlug($slug);
+            $topic      = $styleModel->firstStyleBySlug($slug);
         }
 
         if( empty($topic) ){
 
             $categoryModel = $this->nomalModel->createCategoryModel();
-            $topic         = $categoryModel->firstOrFailCategoryBySlug($slug);
+            $topic         = $categoryModel->firstCategoryBySlug($slug);
         }
 
         $sidebarBuilder = new DataSidebarBuilder();

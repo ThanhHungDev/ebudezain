@@ -12,8 +12,8 @@ class CategoryStyleModel extends Model
         return $this->belongsTo(CategoryTypeModel::class, 'category_type_id', 'id');
     }
 
-    public function firstOrFailStyleBySlug($slug = null){
+    public function firstStyleBySlug($slug = null){
 
-        return $this->where('slug', $slug)->firstOrFail();
+        return $this->where('slug', $slug)->first();
     }
 }

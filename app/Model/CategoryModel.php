@@ -23,8 +23,8 @@ class CategoryModel extends Model
             'id');
     }
 
-    public function firstOrFailCategoryBySlug($slug = null ){
+    public function firstCategoryBySlug($slug = null ){
 
-        return $this->where('slug', $slug)->firstOrFail();
+        return $this->where('slug', $slug)->first();
     }
 }

@@ -188,17 +188,18 @@ class AdminController extends Controller
         }
 
         $styles = $request->category_style_id;
+        if(!empty($styles)){
+            foreach( $styles as $style ){
 
-        foreach( $styles as $style ){
+                $postActiveStyle           = new PostActiveStyleModel();
+                $postActiveStyle->post_id  = $post->id;
+                $postActiveStyle->style_id = $style;
 
-            $postActiveStyle           = new PostActiveStyleModel();
-            $postActiveStyle->post_id  = $post->id;
-            $postActiveStyle->style_id = $style;
-
-            try{
-                $postActiveStyle->save();
-            }catch (\Exception $e){
-                return redirect()->back()->with('SAVE_ERROR', 'error save post active style '.$e->getMessage());
+                try{
+                    $postActiveStyle->save();
+                }catch (\Exception $e){
+                    return redirect()->back()->with('SAVE_ERROR', 'error save post active style '.$e->getMessage());
+                }
             }
         }
         $request->session()->flash($this->SAVE_SUCCESS, true);
@@ -250,17 +251,18 @@ class AdminController extends Controller
 
         $styles = $request->category_style_id;
         (new PostActiveStyleModel())->removeByPostId($post->id);
+        if(!empty($styles)){
+            foreach( $styles as $style ){
 
-        foreach( $styles as $style ){
+                $postActiveStyle           = new PostActiveStyleModel();
+                $postActiveStyle->post_id  = $post->id;
+                $postActiveStyle->style_id = $style;
 
-            $postActiveStyle           = new PostActiveStyleModel();
-            $postActiveStyle->post_id  = $post->id;
-            $postActiveStyle->style_id = $style;
-
-            try{
-                $postActiveStyle->save();
-            }catch (\Exception $e){
-                return redirect()->back()->with('SAVE_ERROR', 'error save post active style '.$e->getMessage());
+                try{
+                    $postActiveStyle->save();
+                }catch (\Exception $e){
+                    return redirect()->back()->with('SAVE_ERROR', 'error save post active style '.$e->getMessage());
+                }
             }
         }
         $request->session()->flash($this->SAVE_SUCCESS, true);

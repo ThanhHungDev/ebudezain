@@ -28,8 +28,7 @@ class VALIDATE_SAVE_POST extends FormRequest
             'site_name'        => 'required|max:255',
             'image_seo'        => 'required|max:255',
             'keyword_seo'      => 'required|max:255',
-            'description_seo'  => 'required|max:255',
-            'category_style_id'=> 'required'
+            'description_seo'  => 'required|max:255'
         ];
     }
     
@@ -53,8 +52,7 @@ class VALIDATE_SAVE_POST extends FormRequest
             'keyword_seo.required'      => ':attribute phải được nhập',
             'keyword_seo.max'           => ':attribute vượt quá :max kí tự',
             'description_seo.required'  => ':attribute phải được nhập',
-            'description_seo.max'       => ':attribute vượt quá :max kí tự',
-            'category_style_id'         => ':attribute phải được nhập',
+            'description_seo.max'       => ':attribute vượt quá :max kí tự'
         ];
     }
 }
