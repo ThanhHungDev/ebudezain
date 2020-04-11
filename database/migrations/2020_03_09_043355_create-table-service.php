@@ -84,6 +84,7 @@ class CreateTableService extends Migration
                 $table->text('image_seo')->nullable();///save : web_image , og:image, ...
                 $table->text('keyword_seo')->nullable(); /// từ khóa
                 $table->text('description_seo')->nullable(); /// mô tả từ khóa
+                $table->string('image_resize', 500)->nullable();
                 $table->timestamps();
             });
         }

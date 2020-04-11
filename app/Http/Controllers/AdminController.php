@@ -13,6 +13,8 @@ use App\Model\PostActiveStyleModel;
 use App\Model\PostModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Helpers\ResizeImage;
+use App\Helpers\Image;
 
 class AdminController extends Controller
 {
@@ -181,6 +183,12 @@ class AdminController extends Controller
         $post->keyword_seo      = $request['keyword_seo'];
         $post->description_seo  = $request['description_seo'];
 
+        $imagesResize = $this->resizeImagePost($request['thumbnail']);
+        if(count($imagesResize)){
+
+            $post->image_resize     = json_encode($request['image_resize']);
+        }
+
         try{
             $post->save();
         }catch (\Exception $e){
@@ -242,6 +250,12 @@ class AdminController extends Controller
         $post->image_seo        = $request['image_seo'];
         $post->keyword_seo      = $request['keyword_seo'];
         $post->description_seo  = $request['description_seo'];
+
+        $imagesResize = $this->resizeImagePost($request['thumbnail']);
+        if(count($imagesResize)){
+            
+            $post->image_resize     = json_encode($request['image_resize']);///ImageResizeConvertor
+        }
 
         try{
             $post->save();
@@ -528,5 +542,35 @@ class AdminController extends Controller
         $status = 200;
         $response = array( 'status' => $status, 'message' => 'success' );
         return response()->json( $response );
+    }
+    private function resizeImagePost($path){
+        try {
+            $output = array();
+        
+            $imageResize    = new ResizeImage();
+            $imageTransfer  = new Image($path);
+            $nameImage      = $imageTransfer->name;
+            $extentionImage = $imageTransfer->extention;
+            $uploadDir      = $imageTransfer->getForderPhysical();
+            $urlDir         = $imageTransfer->renderForderUrl();
+            $imageResize->load($imageTransfer->path);
+            /// handle
+            $sizes = config('system.size-image');
+            foreach ($sizes as $key => $size) {
+                /// save image to root
+                $imagePathPhysical = $uploadDir . "/" . $key . "/" . $nameImage . '.' . $extentionImage;
+                if(!file_exists($imagePathPhysical)){
+                    mkdir($uploadDir . "/" . $key, 0777);
+                }
+                $imageResize->scale_image($size['width'], $size['height'], $size['type']);
+                $imageResize->save($imagePathPhysical);
+
+                /// return output data
+                $output[$key] = $urlDir . "/" . $key . "/" . $nameImage . '.' . $extentionImage;
+            }
+            return $output;
+        } catch (\Throwable $th) {
+            return [];
+        }
     }
 }

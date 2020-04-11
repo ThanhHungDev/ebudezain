@@ -12,6 +12,18 @@
                 <div class="col-12">
                     <h1>{{ $topic->title }}</h1>
                 </div>
+                <div class="col-12">
+                    <p class="excerpt">{{ $topic->excerpt }}</p>
+                </div>
+                <div class="w-100 text-center pt-4">
+                    <img class="entry-thumb" style="width: 100%; height: auto; max-width: 600px;" src="{{ asset( $topic->thumbnail ) }}" alt="{{ $topic->title}}"/>
+                </div>
+                <div class="col-12">
+                    <p class="description">{{ $topic->description }}</p>
+                </div>
+                <div class="col-12">
+                    <h2> Bài Viết Cùng Chủ Đề</h2>
+                </div>
                 @if($sidebar['postNew'])
                 @foreach($sidebar['postNew'] as $post)
                 <div class="col-4 col-md-6 col-xs-12 topic-post-block">

@@ -15,6 +15,11 @@ return [
             'area'    => 'Châu đức, Bà Rịa Vũng Tàu'
         ]
     ],
-    'limit' => 10
+    'limit' => 10,
+    'size-image' => array(
+        'medium'        => array('width' => 600, 'height' => 400, 'type' => 'FILL'),
+        'thumbnail'     => array('width' => 300, 'height' => 200, 'type' => 'FILL'),
+        'small'         => array('width' => 150, 'height' => 100, 'type' => 'FILL')
+    )
 
 ];
