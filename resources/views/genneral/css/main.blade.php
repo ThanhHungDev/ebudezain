@@ -211,7 +211,7 @@ body {
     margin: 0px;
     padding: 0px;
     background-color: #fff;
-    font-family: "Mukta", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-family: 'Roboto', sans-serif;
     font-size: 14px;
     font-weight: normal;
     color: #111;

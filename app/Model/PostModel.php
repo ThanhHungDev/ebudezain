@@ -35,5 +35,9 @@ class PostModel extends Model
         return $this->all();
     }
 
+    public function getPostInTopic($topicId){
+
+        return $this->where('category_type_id', $topicId);
+    }
     
 }

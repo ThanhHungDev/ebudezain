@@ -82,6 +82,14 @@ class HomeController extends Controller
             $topic         = $categoryModel->firstCategoryBySlug($slug);
         }
 
+        if(empty($topic)){
+
+            return redirect()->route('CLIENT_404');
+        }
+
+        $postsInTopic = $this->nomalModel->createPostModel()->getPostInTopic($topic->id)->take(8)->get();
+
+
         $sidebarBuilder = new DataSidebarBuilder();
         $sidebarModel   = $sidebarBuilder
                         ->setModel($this->nomalModel)
@@ -98,7 +106,7 @@ class HomeController extends Controller
 
         $dataLayout = $topic;
 
-        return view('client.topic', compact(['topic', 'slug', 'sidebar', 'dataLayout']) );
+        return view('client.topic', compact(['topic', 'slug', 'sidebar', 'postsInTopic', 'dataLayout']) );
     }
 
     public function search(Request $request){

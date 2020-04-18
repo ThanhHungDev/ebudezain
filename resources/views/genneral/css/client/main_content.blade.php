@@ -33,32 +33,32 @@
     
     .main-content-data h1 {
         font-size: 2em;
-        line-height: line-height(1.802, 1.5);
+        line-height: 1.802;
     }
     
     .main-content-data h2 {
         font-size: 1.8em;
-        line-height: line-height(1.602, 1.5);
+        line-height: 1.602;
     }
 
     .main-content-data h3 {
         font-size: 1.4em;
-        line-height: line-height(1.424, 1.25);
+        line-height: 1.424;
     }
 
     .main-content-data h4 {
         font-size: 1.266em;
-        line-height: line-height(1.266, 1.25);
+        line-height: 1.266;
     }
 
     .main-content-data h5 {
         font-size: 1.125em;
-        line-height: line-height(1.125, 1);
+        line-height: 1.125;
     }
 
     .main-content-data h6 {
         font-size: 1em;
-        line-height: line-height(1, 1);
+        line-height: 1;
     }
 
     .main-content-data figure {

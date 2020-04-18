@@ -254,7 +254,7 @@ class AdminController extends Controller
         $imagesResize = $this->resizeImagePost($request['thumbnail']);
         if(count($imagesResize)){
             
-            $post->image_resize     = json_encode($request['image_resize']);///ImageResizeConvertor
+            $post->image_resize     = json_encode($imagesResize);
         }
 
         try{
@@ -560,7 +560,12 @@ class AdminController extends Controller
                 /// save image to root
                 $imagePathPhysical = $uploadDir . "/" . $key . "/" . $nameImage . '.' . $extentionImage;
                 if(!file_exists($imagePathPhysical)){
-                    mkdir($uploadDir . "/" . $key, 0777);
+
+                    $forderUpload = $uploadDir . "/" . $key;
+                    if(!is_dir($forderUpload)){
+
+                        mkdir($forderUpload, 0777);
+                    }
                 }
                 $imageResize->scale_image($size['width'], $size['height'], $size['type']);
                 $imageResize->save($imagePathPhysical);

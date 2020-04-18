@@ -101,26 +101,92 @@
         box-shadow: -30px -5px 30px -20px rgba(0,0,0,.05);
         background: #fafafc;
         display: block;
-        overflow-x: auto;
+    }
+
+    .wrapper-item-post{
+        display: block;
     }
 
     .topic-post-block{
-        padding-bottom: 24px;
+        display: block;
+        width: 25%;
+        padding: 5px;
+        
+    }
+    .data-text-post-new{
+
+        border-top: 1px solid #f2f2f2;
+        padding: 10px
     }
     .topic-time-block{
-        font-family: 'Open Sans', arial, sans-serif;
-        font-size: 11px;
+
+        font-family  : 'Roboto', sans-serif;
+        font-size    : 11px;
         margin-bottom: 7px;
-        line-height: 1;
-        min-height: 17px;
+        line-height  : 1;
+        min-height   : 17px;
     }
+    .post-data{
+
+        background-color: #f2f2f2;
+        padding : 5px;
+        margin-bottom: 20px
+    }
+
     
+    .main-content-data h3.entry-title a {
+
+        display: block;
+        font-size: 0.9rem;
+        font-family: 'Roboto', sans-serif;
+        text-transform: capitalize;
+        font-weight: 900;
+        line-height: 1.3;
+    }
+    .main-content-data .entry-excerpt a{
+        display: block;
+        font-size: 0.8rem;
+        text-transform: capitalize;
+        font-family: 'Roboto', sans-serif;
+        font-weight: 100;
+        line-height: 1.4;
+    }
+    .entry-meta-info{
+        font-size: 0.7rem;
+    }
+    .title-topic path{
+        color: aquamarine
+    }
 
     /*Medium devices (Small devices, 576px to 768px)*/
     @media screen and (max-width: 767.98px) {
         .wrapper-client-content {
-            margin-left: 0;
+
+            margin-right: -15px;
+            margin-left: -15px;
         }
+
+        .topic-post-block{
+            width: 50%;
+            
+        }
+
+        .main-content-data h3.entry-title{
+            padding: 0;
+            margin: 5px 0;
+        }
+        .main-content-data .entry-excerpt{
+            padding: 0;
+            margin: 5px 0;
+        }
+        .main-content-data .entry-excerpt a{
+            font-size: 0.7rem;
+        }
+        .data-text-post-new{
+
+            padding: 0 10px
+        }
+        
     }
 
 </style>

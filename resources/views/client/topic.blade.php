@@ -1,7 +1,7 @@
 @extends('layout.client.index')
 @section('content')
 <div class="wrapper-client-content clear">
-    <div class="main-content-data">
+    <div class="main-content-data clear">
         <div class="col-12">
             <div class="row">
                 <div class="col-12">
@@ -21,26 +21,82 @@
                 <div class="col-12">
                     <p class="description">{{ $topic->description }}</p>
                 </div>
-                <div class="col-12">
-                    <h2> Bài Viết Cùng Chủ Đề</h2>
-                </div>
-                @if($sidebar['postNew'])
-                @foreach($sidebar['postNew'] as $post)
-                <div class="col-4 col-md-6 col-xs-12 topic-post-block">
-                    <a class="d-block line-height-0" href="{{ Route('CLIENT_GET_POST', ['slug' => $post->slug ])}}">
-                        <img src="{{ $post->thumbnail }}" alt="{{ $post->slug }}"/>
-                    </a>
-                    <h3 class="entry-title td-module-title">
-                        <a href="{{ Route('CLIENT_GET_POST', ['slug' => $post->slug ])}}" title="{{ $post->title }}">
-                            {{ $post->title }}
-                        </a>
-                    </h3>
-                    <div class="td-module-meta-info"><span class="td-post-date">{{ date('d / m / Y', strtotime($post->updated_at)) }}</span></div>
-                </div>
-                @endforeach
-                @endif
+
             </div>
         </div>
+        @if(!$postsInTopic->isEmpty())
+        <div class="col-12">
+            <h2 class="title-topic"> @include("genneral.svg.wreath") Bài Viết Trong Chủ Đề</h2>
+        </div>
+        <div class="col-12 px-0 post-data">
+
+            <div class="wrapper-item-post clear">
+                @foreach($postsInTopic as $post)
+                <div class="topic-post-block float-left">
+                    <div class="bg-white js-item-format-height">
+                        <a class="d-block line-height-0" href="{{ Route('CLIENT_GET_POST', ['slug' => $post->slug ])}}">
+                            @php $image_resize = json_decode($post->image_resize, true); @endphp
+                            <img src="{{ $image_resize['thumbnail'] }}" alt="{{ $post->slug }}"/>
+                        </a>
+                        <div class="data-text-post-new">
+                            <h3 class="entry-title">
+                                <a href="{{ Route('CLIENT_GET_POST', ['slug' => $post->slug ])}}" title="{{ $post->title }}">
+                                    {{ $post->title }}
+                                </a>
+                            </h3>
+                            <p class="entry-excerpt">
+                                <a href="{{ Route('CLIENT_GET_POST', ['slug' => $post->slug ])}}" title="{{ $post->title }}">
+                                    {{ $post->excerpt }}
+                                </a>
+                            </p>
+                            <div class="entry-meta-info">
+                                <span class="td-post-date">{{ date('d / m / Y', strtotime($post->updated_at)) }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+        </div>
+        @endif
+
+        @if($sidebar['postNew'])
+        <div class="col-12">
+            <h2 class="title-topic"> @include("genneral.svg.wreath") Bài Viết Mới</h2>
+        </div>
+        <div class="col-12 px-0 post-data">
+
+            
+            <div class="wrapper-item-post clear">
+                @foreach($sidebar['postNew'] as $post)
+                <div class="topic-post-block float-left">
+                    <div class="bg-white js-item-format-height">
+                        <a class="d-block line-height-0" href="{{ Route('CLIENT_GET_POST', ['slug' => $post->slug ])}}">
+                            @php $image_resize = json_decode($post->image_resize, true); @endphp
+                            <img src="{{ $image_resize['thumbnail'] }}" alt="{{ $post->slug }}"/>
+                        </a>
+                        <div class="data-text-post-new">
+                            <h3 class="entry-title">
+                                <a href="{{ Route('CLIENT_GET_POST', ['slug' => $post->slug ])}}" title="{{ $post->title }}">
+                                    {{ $post->title }}
+                                </a>
+                            </h3>
+                            <p class="entry-excerpt">
+                                <a href="{{ Route('CLIENT_GET_POST', ['slug' => $post->slug ])}}" title="{{ $post->title }}">
+                                    {{ $post->excerpt }}
+                                </a>
+                            </p>
+                            <div class="entry-meta-info">
+                                <span class="td-post-date">{{ date('d / m / Y', strtotime($post->updated_at)) }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+        </div>
+        @endif
+
     </div>
 </div>
 @endsection

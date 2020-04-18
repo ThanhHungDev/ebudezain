@@ -10,6 +10,7 @@
     <meta name="keywords" content="{{ $dataLayout->keywords }}"/>
     <meta name="description" content="{{ $dataLayout->description }}"/>
     <meta name="author" content="Trương Thanh Hùng - 0797581480 - thanhhung.tud@gmail.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
 
     <meta property="og:locale" content="vi_VI" />
     <meta property="og:type" content="website" />

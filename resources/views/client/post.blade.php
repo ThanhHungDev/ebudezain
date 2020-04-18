@@ -9,7 +9,7 @@
     </div>
     @endif
     
-    <div class="main-content-data">
+    <div class="main-content-data clear">
         <h1 class="title pt-3">
             {{ $post->title }} 
         </h1>

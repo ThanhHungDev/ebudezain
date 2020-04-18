@@ -1,6 +1,9 @@
 <?php 
 Route::get('change-language/{language}', 'HomeController@changeLanguage')->name('CHANGE_LANGUAGE');
 
+Route::get('/404', function(){
+    echo 'không tìm thấy trang';
+})->name('CLIENT_404');
 
 Route::group(['middleware' => 'LANGUAGE'], function() {
 
@@ -15,3 +18,4 @@ Route::group(['middleware' => 'LANGUAGE'], function() {
 
     
 });
+

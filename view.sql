@@ -5,6 +5,7 @@ CREATE OR REPLACE VIEW post_new AS
         excerpt,
         REGEXP_REPLACE(content, '(<[^>]+>)|([\\t\\n\\r])', '') AS "content",
         thumbnail,
+        image_resize,
         category_type_id,
         post.like,
         VIEW,
